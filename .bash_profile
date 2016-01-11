@@ -9,4 +9,10 @@
 export HISTFILESIZE=250000
 export EDITOR=emacs
 #
+# $HOME/bin"
+if [[ -f "$HOME/bin/git-prompt.sh" ]]; then
+    source "$HOME/bin/git-prompt.sh"
+    export PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '
+fi
+#
 # JHW stuff preceeds
