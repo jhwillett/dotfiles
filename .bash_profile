@@ -9,10 +9,14 @@
 export HISTFILESIZE=250000
 export EDITOR=emacs
 #
-# $HOME/bin"
-if [[ -f "$HOME/bin/git-prompt.sh" ]]; then
-    source "$HOME/bin/git-prompt.sh"
+# Support my keyboard habits for Git w/ git-prompt and git-completion.
+#
+if [[ -f "$HOME/.git-prompt.sh" ]]; then
+    source "$HOME/.git-prompt.sh"
     export PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '
+fi
+if [[ -f "$HOME/.git-completion.bash" ]]; then
+    source "$HOME/.git-completion.bash"
 fi
 #
 # JHW stuff preceeds
