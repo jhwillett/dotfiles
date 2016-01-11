@@ -8,7 +8,16 @@
 #
 !.gitignore
 !.bash_profile
-!.emacs.d/init.el
-!.elisp/actionscript-mode.el
-!.elisp/.php-mode*/*
-!bin/*
+!.emacs.d
+!.emacs.d/**
+!.elisp
+!.elisp/**
+!bin
+!bin/**
+
+#
+# But seriously, ignore editor cruft:
+#
+*~
+\**
+*\*

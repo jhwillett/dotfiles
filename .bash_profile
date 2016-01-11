@@ -3,4 +3,10 @@
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
+# JHW stuff follows
+#
+[[ -d "$HOME/bin" ]] && export PATH="$PATH:$HOME/bin"
+export HISTFILESIZE=250000
 export EDITOR=emacs
+#
+# JHW stuff preceeds
