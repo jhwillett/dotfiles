@@ -1,0 +1,13 @@
+#!/bin/bash
+#
+# sfind
+
+SCAN_ROOT="$1"
+shift
+GREP_ARGS="$@"
+
+if [[ -z "$GREP_ARGS" ]]; then
+    sfind_heart "$SCAN_ROOT" | tr '\0' '\n'
+else
+    sfind_heart "$SCAN_ROOT" | tr '\0' '\n' | grep "$GREP_ARGS"
+fi

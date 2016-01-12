@@ -1,0 +1,18 @@
+#!/bin/bash
+#
+# sfind_heart
+
+SCAN_ROOT="$1"
+shift
+
+if [ -z "$SCAN_ROOT" ]; then
+    echo "no scan root"
+    exit 1
+fi
+if [ ! -e "$SCAN_ROOT" ]; then
+    echo "sfind_heart: $SCAN_ROOT: No such file or directory"
+    exit 1
+fi
+
+find "$SCAN_ROOT" -print0 -type f \( -name '*file' -o -name '*.rb' -o -name '*.rake' -o -name '*.py' -o -name '*.php' -o -name '*.js' -o -name '*.sh' -o -name '*.bash' -o -name '*.csh' -o -name '*.tcsh' -o -name '*.ksh' -o -name '*.zsh' -o -name '*.xml' -o -name '*.json' -o -name '*.txt' -o -name '*.html' -o -name '*.css' -o -name '*.erb' -o -name '*.procfile' -o -name '*.properties' \)
+
