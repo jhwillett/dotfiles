@@ -4,11 +4,10 @@
 
 SCAN_ROOT="$1"
 shift
-GREP_ARGS="$@"
 
-if [[ -z "$GREP_ARGS" ]]; then
+if [[ -z "$@" ]]; then
     echo "no grep args"
     exit 1
 else
-    sfind_heart "$SCAN_ROOT" | xargs -0 grep -Hn "$GREP_ARGS"
+    sfind_heart "$SCAN_ROOT" | xargs -0 grep -Hn "$@"
 fi

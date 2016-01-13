@@ -14,5 +14,5 @@ if [ ! -e "$SCAN_ROOT" ]; then
     exit 1
 fi
 
-find "$SCAN_ROOT" -print0 -type f \( -name '*file' -o -name '*.rb' -o -name '*.rake' -o -name '*.py' -o -name '*.php' -o -name '*.js' -o -name '*.sh' -o -name '*.bash' -o -name '*.csh' -o -name '*.tcsh' -o -name '*.ksh' -o -name '*.zsh' -o -name '*.xml' -o -name '*.json' -o -name '*.txt' -o -name '*.html' -o -name '*.css' -o -name '*.erb' -o -name '*.procfile' -o -name '*.properties' \)
+find "$SCAN_ROOT" -type f \( -name '*file' -o -name '*.rb' -o -name '*.rake' -o -name '*.py' -o -name '*.php' -o -name '*.js' -o -name '*.sh' -o -name '*.bash' -o -name '*.csh' -o -name '*.tcsh' -o -name '*.ksh' -o -name '*.zsh' -o -name '*.xml' -o -name '*.json' -o -name '*.txt' -o -name '*.html' -o -name '*.css' -o -name '*.erb' -o -name '*.procfile' -o -name '*.properties' \) -print0
 
