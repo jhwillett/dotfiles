@@ -9,5 +9,5 @@ if [[ -z "$@" ]]; then
     echo "no grep args"
     exit 1
 else
-    sfind_heart "$SCAN_ROOT" | xargs -0 grep -Hn "$@"
+    sfind_heart "$SCAN_ROOT" | xargs -0 grep -Hn "$@" | grep -v coverage/index.html
 fi
