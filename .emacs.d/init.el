@@ -97,3 +97,18 @@
 ;; Big fonts please, I'm dying here.
 ;;
 (set-face-attribute 'default nil :height 240)
+
+;; Since Emacs 23 they did this dumb thing where long lines navigate
+;; like two lines.
+;;
+;; This makes it so CTRL-N and CTRL-F and friends move by 1 logical
+;; line - not by 1 line as it's displayed on the terminal.
+;;
+;; Without this, recording macros with like:
+;;
+;;  CTRL-X SHIFT-( macro CTRL-X SHIFT-) CTRL-U CTRL-X CTRL-E
+;;
+;; and so forth can really suck - they behave unpredictably in the
+;; presence of other dev's code.
+;;
+(setq line-move-visual nil)
