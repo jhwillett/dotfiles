@@ -1,6 +1,12 @@
-#!/bin/bash
+#!/bin/sh
 #
 # sfind_heart
+#
+# Files files with "code-like" names at or below $1, emits the names
+# with a \0 character as field separator.
+#
+# Most often called from sfind or sinfind.
+#
 
 SCAN_ROOT="$1"
 shift
@@ -14,5 +20,4 @@ if [ ! -e "$SCAN_ROOT" ]; then
     exit 1
 fi
 
-find "$SCAN_ROOT" -type f \( -name '*file' -o -name 'README.*' -o -name '*.rb' -o -name '*.rake' -o -name '*.py' -o -name '*.php' -o -name '*.js' -o -name '*.sh' -o -name '*.bash' -o -name '*.csh' -o -name '*.tcsh' -o -name '*.ksh' -o -name '*.zsh' -o -name '*.xml' -o -name '*.yml' -o -name '*.yaml' -o -name '*.json' -o -name '*.txt' -o -name '*.md' -o -name '*.html' -o -name '*.css' -o -name '*.erb' -o -name '*.procfile' -o -name '*.properties' -o -name '*.conf' -o -name '*.config' -o -name '*.tcl' -o -name '*.sup' -o -name '*.c' -o -name '*.h' \) -print0
-
+find "$SCAN_ROOT" -type d \( -name .git -o -name .svn -o -name coverage \) -prune -o -type f \( -name 'Makefile*' -o -name 'Rakefile*' -o -name 'Procfile*' -o 'README*' -o -name '*.procfile' -o -name 'Gemfile*' -o -name '*.conf' -o '*.config' -o -name '*.rb' -o -name '*.yml' -o -name '*.yaml' -o -name '*.htm' -o -name '*.html' -o -name '*.css' -o -name '*.scss' -o -name '*.js' -o -name '*.c' -o -name '*.h' -o -name '*.cpp' -o -name '*.hpp' -o -name '*.c++' -o -name '*.php' -o -name '*.py' -o -name '*.el' -o -name '*.rb' -o -name '*.md' -o -name '*.txt' -o -name '*.java' -o -name '*.xml' -o -name '*.xsl' -o -name '*.xhtml' -o -name '*.xlsx' -o -name '*.json' -o -name '*.rake' -o -name '*.mk' -o -name '*.ini' -o -name '*.properties' -o '*.props' -o -name '*.sh' -o -name '*.bash' -o -name '*.zsh' -o -name '*.csh' -o -name '*.tcsh' -o -name '*.ksh' -o -name '*.sql' -o -name '*.erb' -o -name '*.tcl' -o -name '*.sup' -o -name '*.handlebars' -o -name '*.lock' \) -print0
