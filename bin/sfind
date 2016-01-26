@@ -1,6 +1,10 @@
-#!/bin/bash
+#!/bin/sh
 #
 # sfind
+#
+# Finds code-like files at or below $1 whose names match the grep
+# arguments in the rest of the args.
+#
 
 SCAN_ROOT="$1"
 shift
