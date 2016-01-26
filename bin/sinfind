@@ -8,10 +8,11 @@
 
 SCAN_ROOT="$1"
 shift
+GREP_ARGS="$@"
 
-if [[ -z "$@" ]]; then
+if [[ -z "$GREP_ARGS" ]]; then
     echo "no grep args"
     exit 1
 else
-    sfind_heart "$SCAN_ROOT" | xargs -0 grep -Hn "$@" | grep -v coverage/index.html
+    sfind_heart "$SCAN_ROOT" | xargs -0 grep -Hn "$GREP_ARGS"
 fi
