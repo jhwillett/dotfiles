@@ -7,33 +7,48 @@
 # JHW stuff follows
 ############################################################################
 
-# Basics: my bin, history preferences, editor preferences, etc.
+# Emacs all the way added by jhw 2015-04-14.
 #
-[[ -d "$HOME/bin" ]] && export PATH="$PATH:$HOME/bin"
-export HISTFILESIZE=250000
-export EDITOR=emacs
+export EDITOR="emacs"
 
-# Support my keyboard habits for Git w/ git-prompt and git-completion.
+# Huge HISTFILESIZE by jhw 2015-06-05.
 #
-if [[ -f "$HOME/.git-prompt.sh" ]]; then
-    source "$HOME/.git-prompt.sh"
-    export PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '
-fi
-if [[ -f "$HOME/.git-completion.bash" ]]; then
-    source "$HOME/.git-completion.bash"
-fi
+export HISTSIZE=50000
+export HISTFILESIZE=50000
 
-# hgrep needs to be a function, else 'history' doesn't mean what you
-# think it means.
+# hgrep() per by jhw 2015-04-14.
 #
 function hgrep()
 {
-    if [[ -n "$@" ]]; then
-        history | grep "$@"
-    else
-        history
-    fi
+    history | grep "$@"
 }
+
+# git-prompt added by jhw 2015-04-14 per:
+#
+#  https://github.com/git/git/blob/master/contrib/completion/git-prompt.sh
+#
+[[ -s "$HOME/.git-prompt.sh" ]] && source "$HOME/.git-prompt.sh"
+export PS1='\h:\W \u\$ '                           # default
+export PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '     # per git-prompt.sh
+export PS1='[\u@mac \w$(__git_ps1 " (%s)")]\$ '    # jwillett tweak
+
+# git-completion added by jhw 2015-04-28 per:
+#
+#  https://github.com/git/git/blob/master/contrib/completion/git-prompt.sh
+#
+[[ -s "$HOME/.git-completion.bash" ]] && source "$HOME/.git-completion.bash"
+
+# ~/bin added to PATH by jhw 2015-04-13:
+#
+if [ -d ~/bin ]; then
+    export PATH="$PATH:~/bin"
+fi
+
+# ~/Library/Python/2.7/bin added to PATH by jhw 2015-08-13:
+#
+if [ -d ~/Library/Python/2.7/bin ]; then
+    export PATH="$PATH:~/Library/Python/2.7/bin"
+fi
 
 ############################################################################
 # JHW stuff preceeds
