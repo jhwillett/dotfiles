@@ -4,6 +4,26 @@
 ;; December  3, 2003
 ;; February 14, 2006
 ;; May      19, 2009
+;; April    14, 2015
+
+;;; Visual line mode totally breaks the logical structure of the file,
+;;; and really jacks me up when I'm doing ad-hoc editing macros. Worse
+;;; feature, ever! :(
+;;;
+;;; Since Emacs 23 they did this dumb thing where long lines navigate
+;;; like two lines.
+;;;
+;;; This makes it so CTRL-N and CTRL-F and friends move by 1 logical
+;;; line - not by 1 line as it's displayed on the terminal.
+;;;
+;;; Without this, recording macros with like:
+;;;
+;;;  CTRL-X SHIFT-( macro CTRL-X SHIFT-) CTRL-U CTRL-X CTRL-E
+;;;
+;;; and so forth can really suck - they behave unpredictably in the
+;;; presence of other dev's code.
+;;;
+(setq line-move-visual nil)
 
 ;;;; Cause emacs to prompt on exit: I don't like this feature, but
 ;;;; sometimes I activate it to be sure .emacs is loading.
@@ -15,6 +35,8 @@
 ;;;; Stuff from:
 ;;;;   http://www.dotemacs.de/dotfiles/IngoKoch/IngoKoch.emacs-gnu-all.html
 
+;; Set F1 to be a short cut for goto-line
+;;
 (global-set-key [f1] 'goto-line)
 
 ;; ---------------------------------------------------------------------------
@@ -35,22 +57,15 @@
 (require 'font-lock)
 (global-font-lock-mode t)
 
-;; as much colours as possible for c and c++
-(setq font-lock-maximum-decoration
-      '((c-mode    . 5)
-        (c++-mode  . 5)
-        (java-mode . 5)
-        (t         . 5))
-      )
+;; Big fonts please!
+;;
+;; 200 is 20pt font
+;;
+(set-face-attribute 'default nil :height 240)
 
-(setq-default default-tab-width 3)
-(setq c-default-style "bsd")
-(setq-default c-basic-offset 3)
-(setq-default c-indent-tabs-mode nil)
-(setq-default c++-indent-tabs-mode nil)
-(setq-default java-indent-tabs-mode nil)
-(setq-default python-indent-tabs-mode nil)
-;;(custom-set-faces)
+;; Skip the splash screen
+;;
+(setq inhibit-splash-screen t)
 
 ;; Don't intermix tabs and spaces in the indentations (interoperates
 ;; poorly with MS.NET):
@@ -63,52 +78,19 @@
   )
 (global-set-key [f8] 'indent-buffer)
 
-;; The following came from http://www.emacswiki.org/cgi-bin/wiki/PythonMode:
-;(add-to-list 'load-path "d:/cygwin/home/jhw/.elisp")
-;(add-to-list 'load-path "d:/cygwin/home/jhw/.elisp/python-mode-1.0")
-;(autoload 'python-mode "python-mode" "Python Mode." t)
-;(add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
-;(add-to-list 'auto-mode-alist '("\\Sconstruct\\'" . python-mode))
-;(add-to-list 'auto-mode-alist '("\\SConstruct\\'" . python-mode))
-;(add-to-list 'auto-mode-alist '("\\sconstruct\\'" . python-mode))
-;(add-to-list 'interpreter-mode-alist '("python" . python-mode))
-;(add-hook 'python-mode-hook
-;          (lambda ()
-;            (set (make-variable-buffer-local 'beginning-of-defun-function)
-;                 'py-beginning-of-def-or-class)
-;            (setq outline-regexp "def\\|class ")))
-
 ;; php-mode, from:
 ;;
 ;;  http://php-mode.sourceforge.net/php-mode.html#Installation
 ;;
-(add-to-list 'load-path "~/.elisp/php-mode-1.5.0")
-(load "php-mode")
-(add-to-list 'auto-mode-alist '("\\.php[34]?\\'" . php-mode))
+;(add-to-list 'load-path "~/.elisp/php-mode-1.5.0")
+;(load "php-mode")
+;(add-to-list 'auto-mode-alist '("\\.php[34]?\\'" . php-mode))
 
 ;; actionscript-mode, from:
 ;;
 ;;  http://php-mode.sourceforge.net/php-mode.html#Installation
 ;;
-(load-file "~/.elisp/actionscript-mode.el")
-(autoload 'actionscript-mode "javascript" nil t)
-(add-to-list 'auto-mode-alist '("\\.as\\'" . actionscript-mode))
-
-;; Big fonts please, I'm dying here.
-;;
-(set-face-attribute 'default nil :height 240)
-
-;; Since Emacs 23 they did this dumb thing where long lines navigate
-;; like two lines.
-;;
-;; This makes it so CTRL-N and CTRL-F and friends move by 1 logical
-;; line - not by 1 line as it's displayed on the terminal.
-;;
-;; Without this, recording macros with like:
-;;
-;;  CTRL-X SHIFT-( macro CTRL-X SHIFT-) CTRL-U CTRL-X CTRL-E
-;;
-;; and so forth can really suck - they behave unpredictably in the
-;; presence of other dev's code.
-;;
-(setq line-move-visual nil)
+;(load-file "~/.elisp/actionscript-mode.el")
+;(autoload 'actionscript-mode "javascript" nil t)
+;(add-to-list 'auto-mode-alist '("\\.as\\'" . actionscript-mode))
+(put 'upcase-region 'disabled nil)
