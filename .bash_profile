@@ -18,9 +18,16 @@ export HISTFILESIZE=50000
 
 # hgrep() per by jhw 2015-04-14.
 #
+# hgrep needs to be a function, else 'history' doesn't mean what you
+# think it means.
+#
 function hgrep()
 {
-    history | grep "$@"
+    if [[ -n "$@" ]]; then
+        history | grep "$@"
+    else
+        history
+    fi
 }
 
 # git-prompt added by jhw 2015-04-14 per:
