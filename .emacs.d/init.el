@@ -82,15 +82,26 @@
 ;;
 ;;  http://php-mode.sourceforge.net/php-mode.html#Installation
 ;;
-;(add-to-list 'load-path "~/.elisp/php-mode-1.5.0")
-;(load "php-mode")
-;(add-to-list 'auto-mode-alist '("\\.php[34]?\\'" . php-mode))
+(add-to-list 'load-path "~/.elisp/php-mode-1.5.0")
+(load "php-mode")
+(add-to-list 'auto-mode-alist '("\\.php[34]?\\'" . php-mode))
 
 ;; actionscript-mode, from:
 ;;
 ;;  http://php-mode.sourceforge.net/php-mode.html#Installation
 ;;
-;(load-file "~/.elisp/actionscript-mode.el")
-;(autoload 'actionscript-mode "javascript" nil t)
-;(add-to-list 'auto-mode-alist '("\\.as\\'" . actionscript-mode))
+(load-file "~/.elisp/actionscript-mode.el")
+(autoload 'actionscript-mode "javascript" nil t)
+(add-to-list 'auto-mode-alist '("\\.as\\'" . actionscript-mode))
 (put 'upcase-region 'disabled nil)
+
+;; yaml-mode, from:
+;;
+;;  https://github.com/yoshiki/yaml-mode
+;;
+(load-file "~/.elisp/yaml-mode/yaml-mode.el")
+(require 'yaml-mode)
+(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
+(add-hook 'yaml-mode-hook
+          '(lambda ()
+             (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
