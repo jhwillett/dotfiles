@@ -105,3 +105,16 @@
 (add-hook 'yaml-mode-hook
           '(lambda ()
              (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
+
+;; Enhanced Ruby Mode, from:
+;;
+;;   https://github.com/zenspider/enhanced-ruby-mode
+;;
+;(add-to-list 'load-path "~/.elisp/enhanced-ruby-mode")
+;(autoload 'enh-ruby-mode "enh-ruby-mode" "Major mode for ruby files" t)
+;(add-to-list 'auto-mode-alist '("\\.rb$" . enh-ruby-mode))
+;(add-to-list 'interpreter-mode-alist '("ruby" . enh-ruby-mode))
+
+;; optional
+
+;;;(setq enh-ruby-program "(path-to-ruby1.9)/bin/ruby") ; so that still works if ruby points to ruby1.8
