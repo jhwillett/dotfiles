@@ -118,3 +118,4 @@
 ;; optional
 
 ;;;(setq enh-ruby-program "(path-to-ruby1.9)/bin/ruby") ; so that still works if ruby points to ruby1.8
+(put 'downcase-region 'disabled nil)
