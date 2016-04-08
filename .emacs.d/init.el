@@ -61,7 +61,7 @@
 ;;
 ;; 200 is 20pt font
 ;;
-(set-face-attribute 'default nil :height 240)
+(set-face-attribute 'default nil :height 260)
 
 ;; Skip the splash screen
 ;;
