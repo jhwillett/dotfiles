@@ -41,7 +41,7 @@ export PS1='[\u@mac \w$(__git_ps1 " (%s)")]\$ '    # jwillett tweak
 
 # git-completion added by jhw 2015-04-28 per:
 #
-#  https://github.com/git/git/blob/master/contrib/completion/git-prompt.sh
+#  https://github.com/git/git/blob/master/contrib/completion/git-completion.bash
 #
 [[ -s "$HOME/.git-completion.bash" ]] && source "$HOME/.git-completion.bash"
 
