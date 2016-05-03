@@ -119,3 +119,22 @@
 
 ;;;(setq enh-ruby-program "(path-to-ruby1.9)/bin/ruby") ; so that still works if ruby points to ruby1.8
 (put 'downcase-region 'disabled nil)
+
+;; Nice, sane window sizes, thanks to:
+;;
+;;   http://stackoverflow.com/questions/92971
+;;
+;(if (window-system)
+;    (set-frame-height (selected-frame) 40))
+;;345678901234567890123456789012345678901234567890123456789012345678901234567890
+(add-to-list 'default-frame-alist '(width . 80)) ;; my buddy!
+
+;(add-to-list 'load-path "~/.elisp")
+;(require 'column-marker)
+;(column-marker-1 80)
+;(add-hook 'foo-mode-hook (lambda () (interactive) (column-marker-1 80)))
+;(require 'fill-column-indicator)
+;(setq fci-rule-column 17)
+;(setq fci-rule-width 3)
+;(setq fci-rule-color "darkblue")
+
