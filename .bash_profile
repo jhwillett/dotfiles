@@ -57,6 +57,10 @@ if [ -d ~/Library/Python/2.7/bin ]; then
     export PATH="$PATH:~/Library/Python/2.7/bin"
 fi
 
+# Load some private stuff.
+#
+[[ -s "$HOME/.pw_env_jhw" ]] && source "$HOME/.pw_env_jhw"
+
 ############################################################################
 # JHW stuff preceeds
 ############################################################################
