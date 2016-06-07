@@ -127,7 +127,7 @@
 ;(if (window-system)
 ;    (set-frame-height (selected-frame) 40))
 ;;345678901234567890123456789012345678901234567890123456789012345678901234567890
-(add-to-list 'default-frame-alist '(width . 80)) ;; my buddy!
+(add-to-list 'default-frame-alist '(width . 81)) ;; my buddy!
 
 ;(add-to-list 'load-path "~/.elisp")
 ;(require 'column-marker)
