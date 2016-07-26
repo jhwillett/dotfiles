@@ -29,7 +29,7 @@ BatcherJob.perform('es_FOUND_ES_18_indexer_bilge',3,1)
 
 # Get the stats for all ick shards:
 #
-Batchers::Factory::ALL_BATCHERS.values.map(&:ick_names).flatten.map {|n|[n,Ick.ickstats(Redis.current,n)['total_size']]}.to_h
+Batchers::Factory::ALL_BATCHERS.values.map(&:ick_names).flatten.map {|n|[n,Ick.ickstats(Redis.current,n)['pset_size']]}.to_h
 
 # Run all shards of all the live ones 1 entry:
 
