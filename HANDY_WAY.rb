@@ -1,3 +1,8 @@
+
+# Measure all StatsJobs::ALL_GROUPS for runtime.
+#
+StatsJob::ALL_GROUPS.each { |group| s = Time.now ; StatsJob.perform(group) ; t = Time.now - s ; puts "%8.3f: %s" % [ t.to_f, group ] }
+
 # BILGE PUMP: Repeatedy dirty the Summary cache for the tip of all
 # index_bilge batchers:
 #
