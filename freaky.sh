@@ -1,7 +1,9 @@
 #!/bin/sh
 #
 
-for dir in pgcomparator queryator raider s3grooming ; do
-    echo dir: $dir
+SUBDIRS='pgcomparator queryator raider s3grooming'
+
+for dir in $SUBDIRS ; do
+    echo git clone git@github.com:ProsperWorks/ALI.git sacrificial-ali-$dir
 done
-#git clone git@github.com:ProsperWorks/ALI.git sacrificial-ali
+
