@@ -138,3 +138,19 @@
 ;(setq fci-rule-width 3)
 ;(setq fci-rule-color "darkblue")
 
+;; Specify Postgres-mode for .psql and .plsql files, and also for .sql
+;; files because in my env they are almost certainly PG SQL files.
+;;
+(load-file "~/.elisp/plsql.el")
+(add-to-list 'auto-mode-alist
+             '("\\.psql$"  . (lambda ()
+                              (plsql-mode)
+                              (sql-highlight-postgres-keywords))))
+(add-to-list 'auto-mode-alist
+             '("\\.plsql$" . (lambda ()
+                              (plsql-mode)
+                              (sql-highlight-postgres-keywords))))
+(add-to-list 'auto-mode-alist
+             '("\\.sql$"   . (lambda ()
+                              (plsql-mode)
+                              (sql-highlight-postgres-keywords))))
