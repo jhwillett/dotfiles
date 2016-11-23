@@ -64,3 +64,6 @@ fi
 ############################################################################
 # JHW stuff preceeds
 ############################################################################
+
+# set JAVA_HOME per https://sites.google.com/a/mobiusmediagroup.com/eli/engineering/getting-started
+export JAVA_HOME=`/usr/libexec/java_home`
