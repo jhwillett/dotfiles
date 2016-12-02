@@ -7,7 +7,7 @@ def for_all_es_queues(*instance_names)
       "es_#{instance_name}_deleter_primary",
       "es_#{instance_name}_verifier",
     ].each do |batcher_name|
-      10.times do |shard_id|
+      50.times do |shard_id|
         queue_key   = batcher_name
         if 0 != shard_id
           queue_key = "#{batcher_name}/batcher_shard_#{shard_id}"
@@ -24,4 +24,5 @@ def do_one_queue(queue_key)
   puts "#{queue_key}: #{stats['total_size']}"
   Ick.ickdel(Redis.current,queue_key) if stats['total_size'] < 10000
 end
+for_all_es_queues(*Batchers::Factory.all_known_elasticsearch_urls.keys)
 for_all_es_queues('FOUND_ES_13','FOUND_ES_16')
