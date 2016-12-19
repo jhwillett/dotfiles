@@ -8,8 +8,8 @@
 # incept: 2016-12-13
 #
 
-EMAILS="alvin@prosperworks.com"
-APPS="ali-integration-beta ali-integration-beta-public ali-integration-delta ali-integration-epsilon ali-integration-gamma ali-integration-kappa ali-integration-public ali-integration-theta ali-production ali-production-public ali-production-public ali-production-watchman ali-staging ali-staging-public onebox-pw"
+EMAILS="apellerano@prosperworks.com"
+APPS="ali-integration-beta ali-integration-beta-public ali-integration-delta ali-integration-epsilon ali-integration-gamma ali-integration-kappa ali-integration-public ali-integration-theta ali-production ali-production-public ali-production-watchman ali-staging ali-staging-public onebox-pw"
 
 for email in $EMAILS
 do
