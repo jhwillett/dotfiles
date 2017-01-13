@@ -8,7 +8,7 @@
 # incept: 2016-12-13
 #
 
-EMAILS="achou@prosperworks.com alvin@prosperworks.com"
+EMAILS="greg@prosperworks.com"
 APPS="ali-integration-beta ali-integration-beta-public ali-integration-delta ali-integration-epsilon ali-integration-gamma ali-integration-kappa ali-integration-public ali-integration-theta ali-production ali-production-public ali-production-watchman ali-staging ali-staging-public onebox-pw"
 
 for email in $EMAILS
