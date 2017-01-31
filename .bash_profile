@@ -61,6 +61,12 @@ fi
 #
 [[ -s "$HOME/.pw_env_jhw" ]] && source "$HOME/.pw_env_jhw"
 
+# Enable simple CLIs:
+#
+#   ssh ubuntu@ec2-54-89-21-101.compute-1.amazonaws.com
+#
+[[ -f "$HOME/.ssh/jhw-hacky-keypair-ii.pem" ]] && ssh-add "$HOME/.ssh/jhw-hacky-keypair-ii.pem"
+
 ############################################################################
 # JHW stuff preceeds
 ############################################################################
