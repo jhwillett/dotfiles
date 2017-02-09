@@ -37,7 +37,11 @@ function hgrep()
 [[ -s "$HOME/.git-prompt.sh" ]] && source "$HOME/.git-prompt.sh"
 export PS1='\h:\W \u\$ '                           # default
 export PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '     # per git-prompt.sh
-export PS1='[\u@mac \w$(__git_ps1 " (%s)")]\$ '    # jwillett tweak
+
+if uname | grep -i Darwin
+then
+    export PS1='[\u@mac \w$(__git_ps1 " (%s)")]\$ ' # jwillett tweak
+fi
 
 # git-completion added by jhw 2015-04-28 per:
 #
@@ -71,5 +75,8 @@ fi
 # JHW stuff preceeds
 ############################################################################
 
-# set JAVA_HOME per https://sites.google.com/a/mobiusmediagroup.com/eli/engineering/getting-started
-export JAVA_HOME=`/usr/libexec/java_home`
+# set JAVA_HOME per
+# https://sites.google.com/a/mobiusmediagroup.com/eli/engineering/getting-started
+if [ -d /usr/libexec/java_home ]; then
+    export JAVA_HOME=`/usr/libexec/java_home`
+fi
