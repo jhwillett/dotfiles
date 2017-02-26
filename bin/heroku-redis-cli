@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+#
+# heroku-redis-cli
+#
+# Performs redis-cli against a Redis whose url is configured into a
+# Heroku app in the variable REDISCLOUD_URL or REDIS_URL.
+#
+# author: jhw@prosperworks.com
+# incept: 2017-02-35
+#
+
+set -euo pipefail
+
+APP="$1"
+shift
+URL=`heroku config --shell --app ali-staging | grep -e ^REDISCLOUD_URL= -e ^REDIS_URL= | sort | sed 's/.*=//g'`
+AUTH=`echo $URL | sed 's/.*:\(.*\)@.*/\1/g'`
+HOST=`echo $URL | sed 's/.*@\(.*\):.*/\1/g'`
+PORT=`echo $URL | sed 's/.*:\([0-9]*\).*/\1/g'`
+
+#echo "APP:  $APP"
+#echo "URL:  $URL"
+#echo "AUTH: $AUTH"
+#echo "HOST: $HOST"
+#echo "PORT: $PORT"
+
+redis-cli -a $AUTH -h $HOST -p $PORT $@
