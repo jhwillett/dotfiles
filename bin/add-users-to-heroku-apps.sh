@@ -8,8 +8,8 @@
 # incept: 2016-12-13
 #
 
-EMAILS="robert@prosperworks.com"
-EMAILS="`heroku members --org prosperworks | sed 's/\.com.*/.com/g' | grep -v achou`"
+#EMAILS="`heroku members --org prosperworks | sed 's/\.com.*/.com/g' | grep -v achou`"
+EMAILS="achou@prosperworks.com"
 APPS="ali-integration ali-integration-beta ali-integration-beta-public ali-integration-delta ali-integration-epsilon ali-integration-gamma ali-integration-kappa ali-integration-public ali-integration-theta ali-staging ali-staging-public ali-staging-watchman onebox-pw ali-integration-001 ali-integration-002 ali-integration-003 ali-integration-004 ali-integration-005 ali-integration-006 ali-integration-007"
 #APPS="ali-production ali-production-public ali-production-watchman"
 
