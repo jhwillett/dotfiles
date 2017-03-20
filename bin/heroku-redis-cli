@@ -13,7 +13,7 @@ set -euo pipefail
 
 APP="$1"
 shift
-URL=`heroku config --shell --app ali-staging | grep -e ^REDISCLOUD_URL= -e ^REDIS_URL= | sort | sed 's/.*=//g'`
+URL=`heroku config --shell --app $APP | grep -e ^REDISCLOUD_URL= -e ^REDIS_URL= | sort | sed 's/.*=//g'`
 AUTH=`echo $URL | sed 's/.*:\(.*\)@.*/\1/g'`
 HOST=`echo $URL | sed 's/.*@\(.*\):.*/\1/g'`
 PORT=`echo $URL | sed 's/.*:\([0-9]*\).*/\1/g'`
