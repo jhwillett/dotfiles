@@ -43,27 +43,14 @@ then
     export PS1='[\u@mac \w$(__git_ps1 " (%s)")]\$ ' # jwillett tweak
 fi
 
-# git-completion added by jhw 2015-04-28 per:
-#
-#  https://github.com/git/git/blob/master/contrib/completion/git-completion.bash
-#
-[[ -s "$HOME/.git-completion.bash" ]] && source "$HOME/.git-completion.bash"
+[ -d ~/bin ]                    && export PATH="$PATH:~/bin"
+[ -d /usr/local/sbin ]          && export PATH="/usr/local/sbin:$PATH"
+[ -d /usr/local/bin ]           && export PATH="/usr/local/bin:$PATH"
+[ -d ~/Library/Python/2.7/bin ] && export PATH="$PATH:~/Library/Python/2.7/bin"
+[ -d ~/ali-tools/bin ]          && export PATH="$PATH:~/ali-tools/bin"
 
-# ~/bin added to PATH by jhw 2015-04-13:
-#
-if [ -d ~/bin ]; then
-    export PATH="$PATH:~/bin"
-fi
-
-# ~/Library/Python/2.7/bin added to PATH by jhw 2015-08-13:
-#
-if [ -d ~/Library/Python/2.7/bin ]; then
-    export PATH="$PATH:~/Library/Python/2.7/bin"
-fi
-
-# Load some private stuff.
-#
-[[ -s "$HOME/.pw_env_jhw" ]] && source "$HOME/.pw_env_jhw"
+[ -s "$HOME/.git-completion.bash" ] && source "$HOME/.git-completion.bash"
+[ -s "$HOME/.pw_env_jhw" ]          && source "$HOME/.pw_env_jhw"
 
 # Enable simple CLIs:
 #
