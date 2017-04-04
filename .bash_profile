@@ -56,7 +56,10 @@ fi
 #
 #   ssh ubuntu@ec2-54-89-21-101.compute-1.amazonaws.com
 #
+#   ssh ec2-user@ali-jenkins.com
+#
 [[ -f "$HOME/.ssh/jhw-hacky-keypair-ii.pem" ]] && ssh-add "$HOME/.ssh/jhw-hacky-keypair-ii.pem"
+[[ -f "$HOME/.ssh/jenkins.pem" ]] && ssh-add "$HOME/.ssh/jenkins.pem"
 
 ############################################################################
 # JHW stuff preceeds
