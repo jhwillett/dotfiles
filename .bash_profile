@@ -49,6 +49,8 @@ fi
 [ -d ~/Library/Python/2.7/bin ] && export PATH="$PATH:~/Library/Python/2.7/bin"
 [ -d ~/ali-tools/bin ]          && export PATH="$PATH:~/ali-tools/bin"
 
+[ -d /usr/local/opt/elasticsearch@2.4/bin ] && export PATH="/usr/local/opt/elasticsearch@2.4/bin:$PATH"
+
 [ -s "$HOME/.git-completion.bash" ] && source "$HOME/.git-completion.bash"
 [ -s "$HOME/.pw_env_jhw" ]          && source "$HOME/.pw_env_jhw"
 
