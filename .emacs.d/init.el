@@ -166,3 +166,5 @@
  kept-new-versions 6
  kept-old-versions 2
  version-control t)                     ; use versioned backups
+
+(add-to-list 'auto-mode-alist '("Dockerfile[[:alnum:]]*\\'" . makefile-mode))
