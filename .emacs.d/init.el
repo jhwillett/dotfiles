@@ -168,3 +168,4 @@
  version-control t)                     ; use versioned backups
 
 (add-to-list 'auto-mode-alist '("Dockerfile[[:alnum:]]*\\'" . makefile-mode))
+(add-to-list 'auto-mode-alist '("Procfile[[:alnum:]]*\\'" . makefile-mode))
