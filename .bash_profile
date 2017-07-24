@@ -72,3 +72,6 @@ fi
 if [ -d /usr/libexec/java_home ]; then
     export JAVA_HOME=`/usr/libexec/java_home`
 fi
+
+export NVM_DIR="$HOME/.nvm"
+[[ -f "/usr/local/opt/nvm/nvm.sh" ]] && source "/usr/local/opt/nvm/nvm.sh"
