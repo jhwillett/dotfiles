@@ -1,5 +1,7 @@
 #/bin/bash
 #
+# Tricks Homebrew into switching between 2 different versions of ES.
+#
 
 set -x
 
