@@ -169,3 +169,7 @@
 
 (add-to-list 'auto-mode-alist '("Dockerfile[[:alnum:]]*\\'" . makefile-mode))
 (add-to-list 'auto-mode-alist '("Procfile[[:alnum:]]*\\'" . makefile-mode))
+
+;; BATS is in Bash
+;;
+(add-to-list 'auto-mode-alist '("\\.bats$" . shell-script-mode))
