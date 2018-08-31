@@ -167,8 +167,8 @@
  kept-old-versions 2
  version-control t)                     ; use versioned backups
 
-(add-to-list 'auto-mode-alist '("Dockerfile[[:alnum:]]*\\'" . makefile-mode))
-(add-to-list 'auto-mode-alist '("Procfile[[:alnum:]]*\\'" . makefile-mode))
+(add-to-list 'auto-mode-alist '("Dockerfile.*" . makefile-mode))
+(add-to-list 'auto-mode-alist '("Procfile.*" . makefile-mode))
 
 ;; BATS is in Bash
 ;;
