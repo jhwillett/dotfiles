@@ -5,6 +5,9 @@
 
 HEROKU_APP="$1"
 case "$HEROKU_APP" in
+    "ali-testing-onebox")
+        GCP_PROJECT="ali-testing-onebox-spring"
+        ;;
     "ali-integration")
         GCP_PROJECT="ali-integration-desert"
         ;;
