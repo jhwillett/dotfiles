@@ -62,18 +62,28 @@ fi
 #
 #   ssh ec2-user@ali-jenkins.com
 #
-[[ -f "$HOME/.ssh/jhw-hacky-keypair-ii.pem" ]] && ssh-add "$HOME/.ssh/jhw-hacky-keypair-ii.pem"
-[[ -f "$HOME/.ssh/jenkins.pem" ]] && ssh-add "$HOME/.ssh/jenkins.pem"
+#[[ -f "$HOME/.ssh/jhw-hacky-keypair-ii.pem" ]] && ssh-add "$HOME/.ssh/jhw-hacky-keypair-ii.pem"
+#[[ -f "$HOME/.ssh/jenkins.pem" ]] && ssh-add "$HOME/.ssh/jenkins.pem"
 
 ############################################################################
 # JHW stuff preceeds
 ############################################################################
 
 # set JAVA_HOME per
+#
 # https://sites.google.com/a/mobiusmediagroup.com/eli/engineering/getting-started
-if [ -d /usr/libexec/java_home ]; then
+#
+if [ -d /usr/libexec/java_home ]
+then
     export JAVA_HOME=`/usr/libexec/java_home`
 fi
 
 export NVM_DIR="$HOME/.nvm"
 [[ -f "/usr/local/opt/nvm/nvm.sh" ]] && source "/usr/local/opt/nvm/nvm.sh"
+
+# Make tab completion work with kubectl commands.
+#
+if which kubectl
+then
+    source <(kubectl completion bash)
+fi
