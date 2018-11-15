@@ -42,7 +42,7 @@ function hgrep()
 export PS1='\h:\W \u\$ '                           # default
 export PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '     # per git-prompt.sh
 
-if uname | grep -i Darwin
+if uname | grep -i Darwin > /dev/null
 then
     export PS1='[\u@mac \w$(__git_ps1 " (%s)")]\$ ' # jwillett tweak
 fi
@@ -83,7 +83,7 @@ export NVM_DIR="$HOME/.nvm"
 
 # Make tab completion work with kubectl commands.
 #
-if which kubectl
+if which kubectl > /dev/null
 then
     source <(kubectl completion bash)
 fi
