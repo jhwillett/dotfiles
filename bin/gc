@@ -51,7 +51,7 @@ case "$HEROKU_APP" in
         GCP_PROJECT="ali-staging-001-black"
         ;;
     "ali-production")
-        GCP_PROJECT="-ali-production-001-bronze"
+        GCP_PROJECT="ali-production-001-bronze"
         ;;
     *)
         echo "unrecognized HEROKU_APP: \"$HEROKU_APP\""
