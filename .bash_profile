@@ -87,3 +87,11 @@ if which kubectl > /dev/null
 then
     source <(kubectl completion bash)
 fi
+
+# Some GCP utilities developed locally.
+#
+if [ -f "$HOME/helm-config/scripts/kubernetes-shortcuts.shell" ]
+then
+    source "$HOME/helm-config/scripts/kubernetes-shortcuts.shell"
+    source <(kubectl completion bash)
+fi
