@@ -5,6 +5,14 @@
 ;; February 14, 2006
 ;; May      19, 2009
 ;; April    14, 2015
+;; January  20, 2018
+
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+;;
+(package-initialize)
 
 ;;; Visual line mode totally breaks the logical structure of the file,
 ;;; and really jacks me up when I'm doing ad-hoc editing macros. Worse
@@ -61,7 +69,7 @@
 ;;
 ;; 200 is 20pt font
 ;;
-(set-face-attribute 'default nil :height 260)
+(set-face-attribute 'default nil :height 200)
 
 ;; Skip the splash screen
 ;;
@@ -118,16 +126,21 @@
 ;; optional
 
 ;;;(setq enh-ruby-program "(path-to-ruby1.9)/bin/ruby") ; so that still works if ruby points to ruby1.8
+(put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
 
 ;; Nice, sane window sizes, thanks to:
 ;;
 ;;   http://stackoverflow.com/questions/92971
 ;;
-;(if (window-system)
-;    (set-frame-height (selected-frame) 40))
+;;(if (window-system)
+;;   (set-frame-height (selected-frame) 40))
 ;;345678901234567890123456789012345678901234567890123456789012345678901234567890
-(add-to-list 'default-frame-alist '(width . 81)) ;; my buddy!
+;;
+;; I like an editor which is on the top-right of the screen, under
+;; which I can see some lines from my interactive shell.
+;;
+(setq default-frame-alist '((left . -1) (width . 80) (height . 22)))
 
 ;(add-to-list 'load-path "~/.elisp")
 ;(require 'column-marker)
@@ -174,63 +187,28 @@
 ;;
 (add-to-list 'auto-mode-alist '("\\.bats$" . shell-script-mode))
 
-
-;; Added by Package.el.  This must come before configurations of
-;; installed packages.  Don't delete this line.  If you don't want it,
-;; just comment it out by adding a semicolon to the start of the line.
-;; You may delete these explanatory comments.
-;(package-initialize)
-
-;(custom-set-variables
+(custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
-; '(package-selected-packages (quote (go-mode))))
-;(custom-set-faces
+ '(package-selected-packages (quote (go-mode))))
+(custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
-; )
+ )
 
 ;;; Enable Melpa, which is the ELPA email in which we find go-mode.
 ;;;
-;(require 'package)
-;(add-to-list 'package-archives
+(require 'package)
+(add-to-list 'package-archives
 	     '("melpa" . "http://melpa.milkbox.net/packages/") t)
 
-;(global-set-key '[f1] 'goto-line)
-
-;(setq tab-width 2)
-;(add-hook 'go-mode-hook
-  ;        (lambda ()
-    ;        (add-hook 'before-save-hook 'gofmt-before-save)
-      ;      (setq tab-width 2)
-        ;    (setq indent-tabs-mode 1)))
-
-;;;(set-face-attribute 'default (selected-frame) :height 200)
-
-;;; Set initial frame size and position
-;;;
-;;; from https://www.reddit.com/r/emacs/comments/9c0a4d/tip_setting_initial_frame_size_and_position/
-;;;
-;;;(defun my/set-initial-frame ()
-;;;  (let* ((base-factor 0.90)
-;;;	(a-width (* (display-pixel-width) base-factor))
-;;;        (a-height (* (display-pixel-height) base-factor))
-;;;        (a-left (truncate (/ (- (display-pixel-width) a-width) 2)))
-;;;	(a-top (truncate (/ (- (display-pixel-height) a-height) 2))))
-;;;    (set-frame-position (selected-frame) a-left a-top)
-;;;    (set-frame-size (selected-frame) (truncate a-width)  (truncate a-height) t)))
-;;;(setq frame-resize-pixelwise t)
-;;;(my/set-initial-frame)
-
-;;; Show column numbers along with line numbers in status bar.
-;;;
-;;;(setq column-number-mode t)
-
-;;; I like an editor which is on the top-right of the screen, under
-;;; which I can see some lines from my interactive shell.
-;;;
-;;;(setq default-frame-alist '((left . -1) (width . 80) (height . 22)))
+(setq tab-width 2)
+(add-hook 'go-mode-hook
+          (lambda ()
+            (add-hook 'before-save-hook 'gofmt-before-save)
+            (setq tab-width 2)
+            (setq indent-tabs-mode 1)))
