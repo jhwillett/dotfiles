@@ -1,0 +1,5 @@
+echo ZZZZZ
+#if [ -f ~/.bashrc ]
+#then
+#    source ~/.bashrc ]
+#fi

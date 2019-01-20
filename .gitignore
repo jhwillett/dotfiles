@@ -9,6 +9,7 @@
 !.gitignore
 !.git-prompt*
 !.git-completion*
+!.bashrc
 !.bash_profile
 !.emacs.d
 !.emacs.d/**
