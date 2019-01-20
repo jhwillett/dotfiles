@@ -1,0 +1,17 @@
+#!/bin/sh
+#
+# sfind
+#
+# Finds code-like files at or below $1, greps their contents per the
+# rest of the args.
+#
+
+SCAN_ROOT="$1"
+shift
+
+if [[ -z "$@" ]]; then
+    echo "no grep args"
+    exit 1
+else
+    sfind_heart "$SCAN_ROOT" | xargs -0 grep -Hn "$@"
+fi
