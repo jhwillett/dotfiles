@@ -11,11 +11,13 @@
 SCAN_ROOT="$1"
 shift
 
-if [ -z "$SCAN_ROOT" ]; then
+if [ -z "$SCAN_ROOT" ]
+then
     echo "no scan root"
     exit 1
 fi
-if [ ! -e "$SCAN_ROOT" ]; then
+if [ ! -e "$SCAN_ROOT" ]
+then
     echo "sfind_heart: $SCAN_ROOT: No such file or directory"
     exit 1
 fi

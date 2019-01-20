@@ -8,10 +8,12 @@
 
 SCAN_ROOT="$1"
 shift
+THIS_DIR="$(dirname $0)"
 
-if [[ -z "$@" ]]; then
+if [ -z "$@" ]
+then
     echo "no grep args"
     exit 1
 else
-    sfind_heart "$SCAN_ROOT" | xargs -0 grep -Hn "$@"
+    "$THIS_DIR"/sfind_heart "$SCAN_ROOT" | xargs -0 grep -Hn "$@"
 fi
