@@ -7,8 +7,6 @@ case $- in
       *) return;;
 esac
 
-echo X
-
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
@@ -57,16 +55,12 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-echo Y
-
 if [ "$color_prompt" = yes ]; then
     PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
 unset color_prompt force_color_prompt
-
-echo Y1
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
@@ -76,8 +70,6 @@ xterm*|rxvt*)
 *)
     ;;
 esac
-
-echo Y2
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -103,8 +95,6 @@ alias l='ls -CF'
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
-echo Y3
-
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
@@ -113,46 +103,27 @@ echo Y3
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
-echo Y4
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
 if ! shopt -oq posix; then
-    echo Y41
   if [ -f /usr/share/bash-completion/bash_completion ]; then
-      echo Y42
     . /usr/share/bash-completion/bash_completion
   elif [ -f /etc/bash_completion ]; then
-      echo Y43
     . /etc/bash_completion
   fi
-  echo Y44
 fi
 
-echo Y5
-
-# Stuff to keep JHW sane.
-#
-export EDITOR=emacs
-
-echo Y51
-
-echo Y52
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-echo Y53
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-echo Y6
-
 ############################################################################
 # JHW stuff follows
 ############################################################################
-
-echo Z
 
 # Emacs all the way added by jhw 2015-04-14.
 #
@@ -190,8 +161,6 @@ then
     export PS1='[\u@mac \w$(__git_ps1 " (%s)")]\$ ' # jwillett tweak
 fi
 
-echo Y7
-
 [ -d ~/bin ]                    && export PATH="$PATH:~/bin"
 [ -d /usr/local/sbin ]          && export PATH="/usr/local/sbin:$PATH"
 [ -d /usr/local/bin ]           && export PATH="/usr/local/bin:$PATH"
@@ -210,8 +179,6 @@ echo Y7
 #[[ -f "$HOME/.ssh/jhw-hacky-keypair-ii.pem" ]] && ssh-add "$HOME/.ssh/jhw-hacky-keypair-ii.pem"
 #[[ -f "$HOME/.ssh/jenkins.pem" ]] && ssh-add "$HOME/.ssh/jenkins.pem"
 
-echo Y8
-
 ############################################################################
 # JHW stuff preceeds
 ############################################################################
@@ -224,9 +191,6 @@ if [ -d /usr/libexec/java_home ]
 then
     export JAVA_HOME=`/usr/libexec/java_home`
 fi
-
-export NVM_DIR="$HOME/.nvm"
-[[ -f "/usr/local/opt/nvm/nvm.sh" ]] && source "/usr/local/opt/nvm/nvm.sh"
 
 # Make tab completion work with kubectl commands.
 #
@@ -242,5 +206,3 @@ then
     source "$HOME/helm-config/scripts/kubernetes-shortcuts.shell"
     source <(kubectl completion bash)
 fi
-
-echo Y9
