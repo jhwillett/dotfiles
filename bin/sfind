@@ -9,8 +9,11 @@
 SCAN_ROOT="$1"
 shift
 
-if [[ -z "$@" ]]; then
-    sfind_heart "$SCAN_ROOT" | tr '\0' '\n'
+THIS_DIR="$(dirname $0)"
+
+if [ -z "$@" ]
+then
+    "$THIS_DIR"/sfind_heart "$SCAN_ROOT" | tr '\0' '\n'
 else
-    sfind_heart "$SCAN_ROOT" | tr '\0' '\n' | grep "$@"
+    "$THIS_DIR"/sfind_heart "$SCAN_ROOT" | tr '\0' '\n' | grep "$@"
 fi
