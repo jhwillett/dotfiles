@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # sfind
 #
@@ -11,7 +11,7 @@ shift
 
 THIS_DIR="$(dirname $0)"
 
-if [ -z "$@" ]
+if [[ -z "$@" ]]
 then
     echo "no grep args"
     exit 1
