@@ -10,6 +10,7 @@
 !.git-prompt*
 !.git-completion*
 !.bashrc
+!.pythonrc
 !.bash_profile
 !.emacs.el
 !.elisp

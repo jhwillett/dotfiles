@@ -206,3 +206,5 @@ then
     source "$HOME/helm-config/scripts/kubernetes-shortcuts.shell"
     source <(kubectl completion bash)
 fi
+
+export PYTHONSTARTUP=$HOME/.pythonrc
