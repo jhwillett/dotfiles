@@ -212,3 +212,12 @@
             (add-hook 'before-save-hook 'gofmt-before-save)
             (setq tab-width 2)
             (setq indent-tabs-mode 1)))
+
+;;; Finding non-ASCII characters.
+;;;
+;;; https://www.emacswiki.org/emacs/FindingNonAsciiCharacters
+;;;
+(defun occur-non-ascii ()
+  "Find any non-ascii characters in the current buffer."
+  (interactive)
+  (occur "[^[:ascii:]]"))
