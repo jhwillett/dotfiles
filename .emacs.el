@@ -12,7 +12,25 @@
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
 ;;
-(package-initialize)
+;; Packages require Emacs version 24.1 or higher but unfortunately,
+;; MacOS has ancient 22.1.1 at '/usr/bin/emacs --version'.
+;;
+(if (not (version< emacs-version "24.1"))
+    (progn
+     (package-initialize)
+     ;;
+     ;; Enable Melpa, which is the ELPA email in which we find go-mode.
+     ;;
+     (require 'package)
+     (add-to-list 'package-archives
+                  '("melpa" . "http://melpa.milkbox.net/packages/") t)
+     (setq tab-width 2)
+     (add-hook 'go-mode-hook
+               (lambda ()
+                 (add-hook 'before-save-hook 'gofmt-before-save)
+                 (setq tab-width 2)
+                 (setq indent-tabs-mode 1))))
+  )
 
 ;;; Visual line mode totally breaks the logical structure of the file,
 ;;; and really jacks me up when I'm doing ad-hoc editing macros. Worse
@@ -199,19 +217,6 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
-
-;;; Enable Melpa, which is the ELPA email in which we find go-mode.
-;;;
-(require 'package)
-(add-to-list 'package-archives
-	     '("melpa" . "http://melpa.milkbox.net/packages/") t)
-
-(setq tab-width 2)
-(add-hook 'go-mode-hook
-          (lambda ()
-            (add-hook 'before-save-hook 'gofmt-before-save)
-            (setq tab-width 2)
-            (setq indent-tabs-mode 1)))
 
 ;;; Finding non-ASCII characters.
 ;;;
