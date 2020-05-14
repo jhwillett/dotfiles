@@ -11,7 +11,7 @@ shift
 
 THIS_DIR="$(dirname $0)"
 
-if [ -z "$@" ]
+if [[ "" == "$@" ]]
 then
     "$THIS_DIR"/sfind_heart "$SCAN_ROOT" | tr '\0' '\n'
 else
