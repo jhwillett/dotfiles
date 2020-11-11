@@ -146,6 +146,7 @@
 ;;;(setq enh-ruby-program "(path-to-ruby1.9)/bin/ruby") ; so that still works if ruby points to ruby1.8
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
+(setq ruby-insert-encoding-magic-comment nil)
 
 ;; Nice, sane window sizes, thanks to:
 ;;
