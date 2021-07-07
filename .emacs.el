@@ -159,7 +159,7 @@
 ;; I like an editor which is on the top-right of the screen, under
 ;; which I can see some lines from my interactive shell.
 ;;
-(setq default-frame-alist '((left . -1) (width . 80) (height . 22)))
+(setq default-frame-alist '((left . -1) (width . 81) (height . 22)))
 
 ;(add-to-list 'load-path "~/.elisp")
 ;(require 'column-marker)
