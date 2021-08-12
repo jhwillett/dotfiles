@@ -160,6 +160,7 @@
 ;; which I can see some lines from my interactive shell.
 ;;
 (setq default-frame-alist '((left . -1) (width . 81) (height . 22)))
+(setq-default fill-column 80)
 
 ;(add-to-list 'load-path "~/.elisp")
 ;(require 'column-marker)
@@ -170,8 +171,8 @@
 ;(setq fci-rule-width 3)
 ;(setq fci-rule-color "darkblue")
 
-;; Specify Postgres-mode for .psql and .plsql files, and also for .sql
-;; files because in my env they are almost certainly PG SQL files.
+;; Specify Postgres-mode for .psql and .plsql files, and also for .sql files
+;; because in my env they are almost certainly PG SQL files.
 ;;
 (load-file "~/.elisp/plsql.el")
 (add-to-list 'auto-mode-alist
