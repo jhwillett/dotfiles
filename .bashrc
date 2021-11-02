@@ -208,3 +208,4 @@ then
 fi
 
 export PYTHONSTARTUP=$HOME/.pythonrc
+. "$HOME/.cargo/env"
