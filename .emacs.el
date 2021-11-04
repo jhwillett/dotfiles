@@ -228,3 +228,11 @@
   "Find any non-ascii characters in the current buffer."
   (interactive)
   (occur "[^[:ascii:]]"))
+
+;; protobuf mode, per `brew install protobuf` which delivers:
+;;
+;;   /opt/homebrew/share/emacs/site-lisp/protobuf/protobuf-mode.el
+;;
+(add-to-list 'load-path "/opt/homebrew/share/emacs/site-lisp/protobuf")
+(load "protobuf-mode")
+(add-to-list 'auto-mode-alist '("\\.proto\\'" . protobuf-mode))
