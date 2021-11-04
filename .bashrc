@@ -208,4 +208,13 @@ then
 fi
 
 export PYTHONSTARTUP=$HOME/.pythonrc
-. "$HOME/.cargo/env"
+
+if [ -f "$HOME/.cargo/env" ]
+then
+    source "$HOME/.cargo/env"
+fi
+
+if [ -x "/opt/homebrew/bin/brew" ]
+then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
