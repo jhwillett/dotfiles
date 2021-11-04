@@ -7,30 +7,33 @@
 ;; April    14, 2015
 ;; January  20, 2018
 
-;; Added by Package.el.  This must come before configurations of
-;; installed packages.  Don't delete this line.  If you don't want it,
-;; just comment it out by adding a semicolon to the start of the line.
-;; You may delete these explanatory comments.
+;; Emacs packages requires Emacs 24.1 or higher.
 ;;
-;; Packages require Emacs version 24.1 or higher but unfortunately,
-;; MacOS has ancient 22.1.1 at '/usr/bin/emacs --version'.
+;; Fortunately, as of 2021-11-02, both Emacs for Mac OSX and Homebrew emacs are
+;; at 27.2, so we no longer need to check (when (version>= ...)), etc.
 ;;
-(if (not (version< emacs-version "24.1"))
-    (progn
-     (package-initialize)
-     ;;
-     ;; Enable Melpa, which is the ELPA email in which we find go-mode.
-     ;;
-     (require 'package)
-     (add-to-list 'package-archives
-                  '("melpa" . "http://melpa.milkbox.net/packages/") t)
-     (setq tab-width 2)
-     (add-hook 'go-mode-hook
-               (lambda ()
-                 (add-hook 'before-save-hook 'gofmt-before-save)
-                 (setq tab-width 2)
-                 (setq indent-tabs-mode 1))))
-  )
+(package-initialize)
+;;
+;; Enable MELPA, the ELPA repo in which we find go-mode.
+;;
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(package-initialize)
+;;
+;; Install (from MELPA) packages of interest which are not already installed.
+;;
+(mapc
+ (lambda (package)
+   (or (package-installed-p package)
+       (package-install package)))
+ '(go-mode enh-ruby-mode))
+
+;;(setq tab-width 2)
+;;(add-hook 'go-mode-hook
+;;          (lambda ()
+;;            (add-hook 'before-save-hook 'gofmt-before-save)
+;;            (setq tab-width 2)
+;;            (setq indent-tabs-mode 1)))
 
 ;;; Visual line mode totally breaks the logical structure of the file,
 ;;; and really jacks me up when I'm doing ad-hoc editing macros. Worse
@@ -212,7 +215,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages (quote (go-mode))))
+ '(package-selected-packages '(enh-ruby-mode gnugo go-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
