@@ -26,7 +26,7 @@
  (lambda (package)
    (or (package-installed-p package)
        (package-install package)))
- '(go-mode enh-ruby-mode))
+ '(go-mode enh-ruby-mode markdown-mode))
 
 ;;(setq tab-width 2)
 ;;(add-hook 'go-mode-hook
@@ -215,7 +215,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages '(enh-ruby-mode gnugo go-mode)))
+ '(package-selected-packages '(markdown-mode enh-ruby-mode gnugo go-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
