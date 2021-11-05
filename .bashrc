@@ -170,6 +170,11 @@ fi
 [ -s "$HOME/.git-completion.bash" ] && source "$HOME/.git-completion.bash"
 [ -s "$HOME/.pw_env_jhw" ]          && source "$HOME/.pw_env_jhw"
 
+# protoc and other tools will not expand ~ in GO_PATH, so we use $HOME
+#
+[ -d "$HOME/go" ]               && export GO_PATH="$HOME/go"
+[ -d "$HOME/go/bin" ]           && export PATH="$PATH:$HOME/go/bin"
+
 # Enable simple CLIs:
 #
 #   ssh ubuntu@ec2-54-89-21-101.compute-1.amazonaws.com
