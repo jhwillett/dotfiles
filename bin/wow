@@ -1,0 +1,8 @@
+#!/bin/sh
+#
+# wow
+#
+# Builds and launches the service I'm working on.
+#
+
+echo wow && (cd ~/cloud && mage build) && (cd ~/jhw-local-cloud && ./run-cloud.procfile)
