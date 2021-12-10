@@ -95,10 +95,16 @@ fi
 [ -s "$HOME/.git-completion.bash" ] && source "$HOME/.git-completion.bash"
 [ -s "$HOME/.pw_env_jhw" ]          && source "$HOME/.pw_env_jhw"
 
-# protoc and other tools will not expand ~ in GO_PATH, so we use $HOME
+# protoc and other tools will not expand ~ in GOPATH, so we use $HOME
 #
-[ -d "$HOME/go" ]               && export GO_PATH="$HOME/go"
-[ -d "$HOME/go/bin" ]           && export PATH="$PATH:$HOME/go/bin"
+if [ -d "$HOME/go" ]
+then
+    export GOPATH="$HOME/go"
+    if [ -d "$GOPATH/bin" ]
+    then
+        export PATH="$PATH:$GOPATH/bin"
+    fi
+fi
 
 ############################################################################
 # JHW stuff preceeds
