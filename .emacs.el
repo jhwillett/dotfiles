@@ -12,9 +12,8 @@
 ;; Fortunately, as of 2021-11-02, both Emacs for Mac OSX and Homebrew emacs are
 ;; at 27.2, so we no longer need to check (when (version>= ...)), etc.
 ;;
-(package-initialize)
-;;
-;; Enable MELPA, the ELPA repo in which we find go-mode.
+;; We enable MELPA, the widely-used ELPA repo in which we find go-mode and many
+;; other fun packages.
 ;;
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
@@ -26,14 +25,68 @@
  (lambda (package)
    (or (package-installed-p package)
        (package-install package)))
- '(go-mode enh-ruby-mode markdown-mode))
+ '(markdown-mode nginx-mode enh-ruby-mode))
 
-;;(setq tab-width 2)
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 2)
+(setq indent-line-function 'insert-tab)
+
+;; Configure Emacs as a Go Editor From Scratch
+;;
+;;   https://tleyden.github.io/blog/2014/05/22/configure-emacs-as-a-go-editor-from-scratch/
+;;   https://tleyden.github.io/blog/2014/05/27/configure-emacs-as-a-go-editor-from-scratch-part-2/
+;;
+(mapc
+ (lambda (package)
+   (or (package-installed-p package)
+       (package-install package)))
+ '(go-mode exec-path-from-shell)) ;; install packages if not already installed
+
+(add-to-list 'exec-path "/Users/jhw/go/bin/")
+(add-to-list 'exec-path "/opt/homebrew/bin/")
+(add-hook 'before-save-hook 'gofmt-before-save)
+
+;; TODO(jhw): godef-jump is a cool function, bind it to a hot key!?
+
 ;;(add-hook 'go-mode-hook
 ;;          (lambda ()
 ;;            (add-hook 'before-save-hook 'gofmt-before-save)
 ;;            (setq tab-width 2)
-;;            (setq indent-tabs-mode 1)))
+;;            (setq indent-tabs-mode 1)
+;;            ))
+
+;;(setq gofmt-command "goimports")
+;;(add-hook 'go-mode-hook (lambda () (add-hook 'before-save-hook 'gofmt-before-save)))
+
+(defun set-exec-path-from-shell-PATH ()
+  (let ((path-from-shell (replace-regexp-in-string
+                          "[ \t\n]*$"
+                          ""
+                          (shell-command-to-string "$SHELL --login -i -c 'echo $PATH'"))))
+    (setenv "PATH" path-from-shell)
+    (setq eshell-path-env path-from-shell) ; for eshell users
+    (setq exec-path (split-string path-from-shell path-separator))))
+(when window-system (set-exec-path-from-shell-PATH))
+
+(setenv "GOPATH" "/Users/tleyden/Development/gocode")
+(getenv "PATH")
+(getenv "GOPATH")
+
+(defun my-go-mode-hook ()
+  ; Use goimports instead of go-fmt
+  (setq gofmt-command "goimports")
+  ; Call Gofmt before saving
+  (add-hook 'before-save-hook 'gofmt-before-save)
+  ; Customize compile command to run go build
+  (if (not (string-match "go" compile-command))
+      (set (make-local-variable 'compile-command)
+           "go build -v && go test -v && go vet"))
+  ; Godef jump key binding
+  (local-set-key (kbd "M-.") 'godef-jump)
+  (local-set-key (kbd "M-*") 'pop-tag-mark)
+)
+(add-hook 'go-mode-hook 'my-go-mode-hook)
+
 
 ;;; Visual line mode totally breaks the logical structure of the file,
 ;;; and really jacks me up when I'm doing ad-hoc editing macros. Worse
@@ -67,6 +120,7 @@
 ;; Set F1 to be a short cut for goto-line
 ;;
 (global-set-key [f1] 'goto-line)
+(global-set-key "\C-j" 'goto-line)
 
 ;; ---------------------------------------------------------------------------
 ;; Beside the row I'd also like to see the column in the mode line
@@ -114,6 +168,15 @@
 (add-to-list 'load-path "~/.elisp/php-mode-1.5.0")
 (load "php-mode")
 (add-to-list 'auto-mode-alist '("\\.php[34]?\\'" . php-mode))
+
+;; Use bash-mode for Procfiles.
+;;
+;; There is foreman-mode in MELPA but I had trouble getting it to install, and
+;; it seems to want to execute Procfiles, not focus on editing them.
+;;
+(add-to-list 'auto-mode-alist '("\\.procfile" . shell-mode))
+(add-to-list 'auto-mode-alist '("Procfile"    . shell-mode))
+
 
 ;; actionscript-mode, from:
 ;;
@@ -215,7 +278,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages '(markdown-mode enh-ruby-mode gnugo go-mode)))
+ '(package-selected-packages
+   '(exec-path-from-shell nginx-mode foreman-mode procfile-mode markdown-mode enh-ruby-mode gnugo go-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
