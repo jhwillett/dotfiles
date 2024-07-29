@@ -86,11 +86,11 @@ then
     export PS1='[\u@mac \w$(__git_ps1 " (%s)")]\$ ' # jwillett tweak
 fi
 
-[ -d ~/bin ]                    && export PATH="$PATH:~/bin"
 [ -d /usr/local/sbin ]          && export PATH="/usr/local/sbin:$PATH"
 [ -d /usr/local/bin ]           && export PATH="/usr/local/bin:$PATH"
-[ -d ~/Library/Python/2.7/bin ] && export PATH="$PATH:~/Library/Python/2.7/bin"
-[ -d ~/ali-tools/bin ]          && export PATH="$PATH:~/ali-tools/bin"
+[ -d ~/Library/Python/3.9/bin ] && export PATH="$PATH:$HOME/Library/Python/3.9/bin"
+[ -d ~/Library/Python/2.7/bin ] && export PATH="$PATH:$HOME/Library/Python/2.7/bin"
+[ -d ~/bin ]                    && export PATH="$PATH:$HOME/bin"
 
 [ -s "$HOME/.git-completion.bash" ] && source "$HOME/.git-completion.bash"
 [ -s "$HOME/.pw_env_jhw" ]          && source "$HOME/.pw_env_jhw"

@@ -21,11 +21,19 @@
 ;;
 ;; Install (from MELPA) packages of interest which are not already installed.
 ;;
-(mapc
- (lambda (package)
-   (or (package-installed-p package)
-       (package-install package)))
- '(markdown-mode nginx-mode enh-ruby-mode))
+(defun package-install-if-not-installed (package)
+  (or (package-installed-p package)
+      (package-install package)
+      ))
+;;(package-install-if-not-installed 'markdown-mode)
+;;(package-install-if-not-installed 'nginx-mode)
+;;(package-install-if-not-installed 'enh-ruby-mode)
+;;(package-install-if-not-installed 'gnugo)
+;;(mapc
+;; (lambda (package)
+;;   (or (package-installed-p package)
+;;      (package-install package)))
+;; '(markdown-mode nginx-mode enh-ruby-mode))
 
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 2)
@@ -36,11 +44,11 @@
 ;;   https://tleyden.github.io/blog/2014/05/22/configure-emacs-as-a-go-editor-from-scratch/
 ;;   https://tleyden.github.io/blog/2014/05/27/configure-emacs-as-a-go-editor-from-scratch-part-2/
 ;;
-(mapc
- (lambda (package)
-   (or (package-installed-p package)
-       (package-install package)))
- '(go-mode exec-path-from-shell)) ;; install packages if not already installed
+;;(mapc
+;; (lambda (package)
+;;   (or (package-installed-p package)
+;;       (package-install package)))
+;; '(go-mode exec-path-from-shell)) ;; install packages if not already installed
 
 (add-to-list 'exec-path "/Users/jhw/go/bin/")
 (add-to-list 'exec-path "/opt/homebrew/bin/")
@@ -301,5 +309,5 @@
 ;;   /opt/homebrew/share/emacs/site-lisp/protobuf/protobuf-mode.el
 ;;
 (add-to-list 'load-path "/opt/homebrew/share/emacs/site-lisp/protobuf")
-(load "protobuf-mode")
-(add-to-list 'auto-mode-alist '("\\.proto\\'" . protobuf-mode))
+;;(load "protobuf-mode")
+;;(add-to-list 'auto-mode-alist '("\\.proto\\'" . protobuf-mode))
