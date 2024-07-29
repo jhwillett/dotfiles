@@ -106,6 +106,17 @@ then
     fi
 fi
 
+# per rustup:
+#
+if [ -d "$HOME/.cargo/bin" ]
+then
+    export PATH="$PATH:$HOME/.cargo/bin"
+    if [ -x "$HOME/.cargo/bin" ]
+    then
+       source "$HOME/.cargo/env"
+    fi
+fi
+
 ############################################################################
 # JHW stuff preceeds
 ############################################################################

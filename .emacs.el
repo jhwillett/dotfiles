@@ -287,7 +287,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(exec-path-from-shell nginx-mode foreman-mode procfile-mode markdown-mode enh-ruby-mode gnugo go-mode)))
+   '(rust-mode exec-path-from-shell nginx-mode foreman-mode procfile-mode markdown-mode enh-ruby-mode gnugo go-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -311,3 +311,14 @@
 (add-to-list 'load-path "/opt/homebrew/share/emacs/site-lisp/protobuf")
 ;;(load "protobuf-mode")
 ;;(add-to-list 'auto-mode-alist '("\\.proto\\'" . protobuf-mode))
+
+
+;; rust-mode and friends
+;;
+;; https://github.com/rust-lang/rust-mode?tab=readme-ov-file#melpa
+;;
+;; This worked after:
+;;
+;;   M-x package-install rust-mode
+;;
+(require 'rust-mode)

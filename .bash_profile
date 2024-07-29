@@ -15,3 +15,10 @@ fi
 #
 export PATH="/usr/local/opt/openjdk/bin:$PATH"
 export CPPFLAGS="-I/usr/local/opt/openjdk/include"
+
+# similar to what the rustup installer did
+#
+if [ -x "$HOME/.cargo/bin" ]
+then
+    source "$HOME/.cargo/env"
+fi
