@@ -156,3 +156,16 @@ if [ -x "/opt/homebrew/bin/brew" ]
 then
     eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
+
+# Per https://kylemayes.github.io/vulkanalia/development_environment.html, after
+# installing vulkansdk-macos-1.3.290.0.dmg from https://vulkan.lunarg.com/ I
+# want to include a call to their setup-env.sh in my environment.
+#
+VULKAN_HOME="$HOME/VulkanSDK/1.3.290.0"
+if [ -d "$VULKAN_HOME" ]
+then
+    if [ -f "$VULKAN_HOME/setup-env.sh" ]
+    then
+        source "$VULKAN_HOME/setup-env.sh"
+    fi
+fi
