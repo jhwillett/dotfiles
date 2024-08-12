@@ -322,3 +322,28 @@
 ;;   M-x package-install rust-mode
 ;;
 (require 'rust-mode)
+
+;;
+;; GLSL is the OpenGL Shading Language, and I use it sometimes as part of my
+;; Vulkan projects.
+;;
+;;   https://kylemayes.github.io/vulkanalia/pipeline/shader_modules.html
+;;
+;;   Unlike earlier APIs, shader code in Vulkan has to be specified in a
+;;   bytecode format as opposed to human-readable syntax like GLSL and
+;;   HLSL. This bytecode format is called SPIR-V and is designed to be used with
+;;   both Vulkan and OpenCL (both Khronos APIs). It is a format that can be used
+;;   to write graphics and compute shaders, but we will focus on shaders used in
+;;   Vulkan's graphics pipelines in this tutorial.
+;;
+;;   [...]
+;;
+;;   However, that does not mean that we need to write this bytecode by
+;;   hand. Khronos has released their own vendor-independent compiler that
+;;   compiles GLSL to SPIR-V.
+;;
+(add-to-list 'load-path "~/.elisp/glsl-mode")
+(load "glsl-mode")
+;;(autoload 'glsl-mode "glsl-mode" nil t)
+(add-to-list 'auto-mode-alist '("\\.vert\\'" . glsl-mode))
+(add-to-list 'auto-mode-alist '("\\.frag\\'" . glsl-mode))
