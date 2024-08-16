@@ -164,6 +164,7 @@ fi
 VULKAN_HOME="$HOME/VulkanSDK/1.3.290.0"
 if [ -d "$VULKAN_HOME" ]
 then
+    export VULKAN_HOME
     if [ -f "$VULKAN_HOME/setup-env.sh" ]
     then
         source "$VULKAN_HOME/setup-env.sh"
