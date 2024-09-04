@@ -40,8 +40,6 @@ if ! shopt -oq posix; then
   fi
 fi
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
@@ -169,4 +167,86 @@ then
     then
         source "$VULKAN_HOME/setup-env.sh"
     fi
+fi
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable
+# change.
+
+# TODO jhw: @hy do we want $HOM/.rvm/bin last instead of first in PATH?
+#
+# Also load RVM into a shell session *as a function*.
+#
+if false
+then
+    if [[ -d "$HOME/.rvm/bin" ]]
+    then
+        export PATH="$PATH:$HOME/.rvm/bin"
+    fi
+    if [[ -s "$HOME/.rvm/scripts/rvm" ]]
+    then
+        source "$HOME/.rvm/scripts/rvm"
+    fi
+fi
+
+# Trying ruby from:
+#
+#   brew install ruby-install
+#   ruby-install ruby 3.3
+#
+if [[ -d "$HOME/.rubies/ruby-3.3.4/bin" ]]
+then
+    export PATH="$HOME/.rubies/ruby-3.3.4/bin:$PATH"
+fi
+
+if [[ -d "/usr/local/share/android-ndk" ]]
+then
+    export ANDROID_NDK_HOME="/usr/local/share/android-ndk"
+    export NDK_HOME="$ANDROID_NDK_HOME"
+    echo ".bashrc found: ANDROID_NDK_HOME aka NDK_HOME=\"$ANDROID_NDK_HOME\""
+    if [[ -d "$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/darwin-x86_64/bin" ]]
+    then
+        # cargo-mobile expects tool `ar`, NDK uses `llvm-ar` since v23
+        #
+        # See https://github.com/BrainiumLLC/cargo-mobile/issues/53.
+        #
+        MY_ARCH_TYPE=darwin-x86_64
+        for TARGET_ARCH_TYPE in aarch64-linux-android-ar arm-linux-androideabi-ar i686-linux-android-ar i686-linux-android-ar x86_64-linux-android-ar
+        do
+            ln -sf llvm-ar "$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/$MY_ARCH_TYPE/bin/$TARGET_ARCH_TYPE"
+        done
+    fi
+fi
+
+if [[ -d "/usr/local/share/android-commandlinetools/cmdline-tools" ]]
+then
+    export ANDROID_SDK_ROOT="/usr/local/share/android-commandlinetools"
+    echo ".bashrc found: ANDROID_SDK_ROOT=\"$ANDROID_SDK_ROOT\""
+    if [[ -d "$ANDROID_SDK_ROOT/emulator" ]]
+    then
+        export PATH="$PATH:$ANDROID_SDK_ROOT/emulator"
+        echo ".bashrc found: PATH to Android emulator tools"
+    fi
+    if [[ -d "$ANDROID_SDK_ROOT/platform-tools" ]]
+    then
+        export PATH="$PATH:$ANDROID_SDK_ROOT/platform-tools"
+        echo ".bashrc found: PATH to Android adb tools"
+    fi
+fi
+if [[ -n "$ANDROID_SDK_ROOT" ]] && [[ -d "$ANDROID_SDK_ROOT/ndk/27.0.12077973" ]]
+then
+    export ANDROID_NDK_HOME="$ANDROID_SDK_ROOT/ndk/27.0.12077973"
+    export NDK_HOME="$ANDROID_NDK_HOME"
+    echo ".bashrc found: ANDROID_NDK_HOME=\"$ANDROID_NDK_HOME\""
+fi
+
+if [[ -d "/usr/local/opt/llvm/bin" ]]
+then
+    export PATH="/usr/local/opt/llvm/bin:$PATH"
+    echo ".bashrc found: PATH to llvm"
+fi
+
+if [[ -d "$HOME/xbuild/target/debug" ]]
+then
+    export PATH="$HOME/xbuild/target/debug:$PATH"
+    echo ".bashrc found: PATH to locally-built xbuild"
 fi
