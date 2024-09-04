@@ -347,3 +347,15 @@
 ;;(autoload 'glsl-mode "glsl-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.vert\\'" . glsl-mode))
 (add-to-list 'auto-mode-alist '("\\.frag\\'" . glsl-mode))
+
+
+;; beancount-mode https://github.com/beancount/beancount-mode
+;;
+(add-to-list 'load-path "~/.elisp/beancount-mode")
+(require 'beancount)
+(add-to-list 'auto-mode-alist '("\\.beancount\\'" . beancount-mode))
+
+;; wgsl-mode https://github.com/acowley/wgsl-mode
+;;
+(add-to-list 'load-path "~/.elisp/wgsl-mode")
+(load "wgsl-mode")
