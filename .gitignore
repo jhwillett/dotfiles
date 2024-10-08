@@ -17,6 +17,7 @@
 !.elisp/**
 !bin
 !bin/**
+!.cargo/.config
 
 #
 # But seriously, ignore editor cruft:

@@ -86,8 +86,6 @@ fi
 
 [ -d /usr/local/sbin ]          && export PATH="/usr/local/sbin:$PATH"
 [ -d /usr/local/bin ]           && export PATH="/usr/local/bin:$PATH"
-[ -d ~/Library/Python/3.9/bin ] && export PATH="$PATH:$HOME/Library/Python/3.9/bin"
-[ -d ~/Library/Python/2.7/bin ] && export PATH="$PATH:$HOME/Library/Python/2.7/bin"
 [ -d ~/bin ]                    && export PATH="$PATH:$HOME/bin"
 
 [ -s "$HOME/.git-completion.bash" ] && source "$HOME/.git-completion.bash"
@@ -143,7 +141,23 @@ then
     source <(kubectl completion bash)
 fi
 
-export PYTHONSTARTUP=$HOME/.pythonrc
+if [ -d "$HOME/.pythonrc" ]
+then
+    export PYTHONSTARTUP="$HOME/.pythonrc"
+fi
+
+# This may break the beancount installed by Homebrew.
+#
+# Unfortunately, this may have gotten some cargo-ndk and/or Android Studio stuff
+# to work correctly.
+#
+# TODO: WTF with having a nice clean python3 installation?
+#
+#if [[ -d "$(brew --prefix)/opt/python@3/libexec/bin" ]]
+#then
+#    export PATH="$(brew --prefix)/opt/python@3/libexec/bin:$PATH"
+#    echo ".bashrc found: PATH to python@3"
+#fi
 
 if [ -f "$HOME/.cargo/env" ]
 then
@@ -171,7 +185,7 @@ fi
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable
 # change.
-
+#
 # TODO jhw: @hy do we want $HOM/.rvm/bin last instead of first in PATH?
 #
 # Also load RVM into a shell session *as a function*.
@@ -198,25 +212,6 @@ then
     export PATH="$HOME/.rubies/ruby-3.3.4/bin:$PATH"
 fi
 
-if [[ -d "/usr/local/share/android-ndk" ]]
-then
-    export ANDROID_NDK_HOME="/usr/local/share/android-ndk"
-    export NDK_HOME="$ANDROID_NDK_HOME"
-    echo ".bashrc found: ANDROID_NDK_HOME aka NDK_HOME=\"$ANDROID_NDK_HOME\""
-    if [[ -d "$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/darwin-x86_64/bin" ]]
-    then
-        # cargo-mobile expects tool `ar`, NDK uses `llvm-ar` since v23
-        #
-        # See https://github.com/BrainiumLLC/cargo-mobile/issues/53.
-        #
-        MY_ARCH_TYPE=darwin-x86_64
-        for TARGET_ARCH_TYPE in aarch64-linux-android-ar arm-linux-androideabi-ar i686-linux-android-ar i686-linux-android-ar x86_64-linux-android-ar
-        do
-            ln -sf llvm-ar "$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/$MY_ARCH_TYPE/bin/$TARGET_ARCH_TYPE"
-        done
-    fi
-fi
-
 if [[ -d "/usr/local/share/android-commandlinetools/cmdline-tools" ]]
 then
     export ANDROID_SDK_ROOT="/usr/local/share/android-commandlinetools"
@@ -237,6 +232,11 @@ then
     export ANDROID_NDK_HOME="$ANDROID_SDK_ROOT/ndk/27.0.12077973"
     export NDK_HOME="$ANDROID_NDK_HOME"
     echo ".bashrc found: ANDROID_NDK_HOME=\"$ANDROID_NDK_HOME\""
+fi
+if [[ -n "$ANDROID_SDK_ROOT" ]] && [[ -d "$ANDROID_SDK_ROOT/build-tools/35.0.0" ]]
+then
+    export PATH="$ANDROID_SDK_ROOT/build-tools/35.0.0:$PATH"
+    echo ".bashrc found: PATH to Android SDK build tools"
 fi
 
 if [[ -d "/usr/local/opt/llvm/bin" ]]
