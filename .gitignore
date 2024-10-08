@@ -17,7 +17,7 @@
 !.elisp/**
 !bin
 !bin/**
-!.cargo/.config
+!.cargo/config.toml
 
 #
 # But seriously, ignore editor cruft:
