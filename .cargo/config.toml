@@ -8,5 +8,7 @@ color      = 'always' # whether cargo colorizes output
 hyperlinks = true     # whether cargo inserts links into output
 
 [alias]
-r  = "run jhw"
-rr = "run --release jhw"
+r   = "run jhw"
+ra  = "run --all-features jhw"
+rr  = "run --release jhw"
+rra = "run --all-features --release jhw"
