@@ -37,7 +37,7 @@ Install iTerm 3.5.12:
 * Open in Finder and install.
 * Make text bigger ;)
 * In iTerm / Settings;
-  * General / Selection deselect “Copy to clip on selection”
+  * General / Selection select “Copy to clip on selection”
   * Profiles / Text / Font select Andale Mono 22
   * Terminal set scrollback lines to 10000.
 
@@ -79,6 +79,21 @@ Install Homebrew:
 ```
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
+* Preferred packages: `brew install emacs`
+
+Configure Git:
+* Check for presence of `~/.gitconfig`.
+* Edit if you don't like it.
+* If not found, run `git config --global --edit`.
+* Can also do `git config user.name "Jesse H. Willett"`.
+* Can also do `git config user.email "jhw@roundingerrorgames.com"`.
+
+There is a `~/.gitconfig` included with https://github.com/jhwillett/dotfiles as
+of 2025-04-07.  This is convenient for a JHW who is self-employed and only has
+to worry about one online identity.  If JHW has multiple dev accounts which he
+uses in different contexts, but JHW still wants to share the same dotfiles repo,
+then this Git identity file should be excluded from the dotfiles just like we
+exclude more sensitive credentials such as those under `~/.ssh/`.
 
 Uninstall as much pre-installed cruft as permitted:
 * Under Finder / Applications.
