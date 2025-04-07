@@ -1,11 +1,9 @@
-;; JHW's .emacs file
-;; Jesse H. Willett
+;; ~/.emacs.el
 ;;
-;; December  3, 2003
-;; February 14, 2006
-;; May      19, 2009
-;; April    14, 2015
-;; January  20, 2018
+;; JHW's configuration for all flavors of Emacs, carried forward and updated
+;; gradually for over twenty years!
+;;
+;; origin: 2003-12-03
 
 ;; Emacs packages requires Emacs 24.1 or higher.
 ;;
