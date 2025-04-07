@@ -20,12 +20,38 @@ Make typing feel right:
   * Set delay until repeat to "short".
   * Much better!
 
+What, me presbyopia?
+* In Apple / System Settings / Accessibility / Display:
+  * Under Pointer, set pointer size to medium.
+  * Under Text, set text size to 16 pt.
+  * Under Text, set menu bar size to large.
+
+Minor stuff.
+* In Apple / System Settings / Appearance:
+  * Set Accent color to green.
+
 Install Chrome:
 * Launch Safari.
 * Browse to https://google.com.
 * Note invitation to install Chrome.
 * Install Chrome, then launch.
 * Note call to action to set Chrome as default browser.
+
+Uninstall as much pre-installed cruft as permitted:
+* Under Finder / Applications.
+* Right-click on apps, look for Move To Trash.
+* You will find regrettably few pre-installed apps which can be deleted.
+* In Monterey I found a handful of things which I could cut.
+* In Sequoria, I found zero pre-installed apps which were removable.
+  * Only Emacs, iTerm, and Chrome were removable.
+  * I installed all of these myself.
+* Crap like Stocks and Apple TV is considered a "core component" of MacOS. :/
+* Maybe the DoJ will unbundle Apple after they forced Google to sell Chrome.
+
+Review iCloud cruft and minimize.
+* Under System Settings / Apple Account / iCloud / Saved to iCloud / See All.
+* Disable everything, except maybe "Find My Mac".
+* Under iCloud Drive / Apps syncing to iCloud Drive, make sure all are disabled.
 
 Clean up Dock:
 * Removed almost everything from Dock.
@@ -95,18 +121,18 @@ uses in different contexts, but JHW still wants to share the same dotfiles repo,
 then this Git identity file should be excluded from the dotfiles just like we
 exclude more sensitive credentials such as those under `~/.ssh/`.
 
-Uninstall as much pre-installed cruft as permitted:
-* Under Finder / Applications.
-* Right-click on apps, look for Move To Trash.
-* You will find regrettably few pre-installed apps which can be deleted.
-* In Monterey I found a handful of things which I could cut.
-* In Sequoria, I found zero pre-installed apps which were removable.
-  * Only Emacs, iTerm, and Chrome were removable.
-  * I installed all of these myself.
-* Crap like Stocks and Apple TV is considered a "core component" of MacOS. :/
-* Maybe the DoJ will unbundle Apple after they forced Google to sell Chrome.
+https://docs.github.com/en/get-started/git-basics/set-up-git#authenticating-with-github-from-git
 
-Review iCloud cruft and minimize.
-* Under System Settings / Apple Account / iCloud / Saved to iCloud / See All.
-* Disable everything, except maybe "Find My Mac".
-* Under iCloud Drive / Apps syncing to iCloud Drive, make sure all are disabled.
+Configure Git to authenticate to GitHub:
+* https://docs.github.com/en/get-started/git-basics/set-up-git#authenticating-with-github-from-git
+* https://docs.github.com/en/get-started/git-basics/caching-your-github-credentials-in-git#git-credential-manager
+* To access Rounding Error Games:
+```
+git clone https://github.com/RoundingErrorGames/roundingerrorgames.github.io.git
+brew install --cask git-credential-manager
+cd
+git clone https://github.com/RoundingErrorGames/deciduous.git
+```
+The first repository is public and did not require any special access.  The
+second repository is private and will only work if `git-credential-manager` can
+successfully push you through an auth flow with GitHub.
