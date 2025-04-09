@@ -95,15 +95,9 @@ then
     fi
 fi
 
-# per rustup:
-#
-if [ -d "$HOME/.cargo/bin" ]
+if [ -f "$HOME/.cargo/bin" ]
 then
-    export PATH="$PATH:$HOME/.cargo/bin"
-    if [ -x "$HOME/.cargo/bin" ]
-    then
-       source "$HOME/.cargo/env"
-    fi
+    source "$HOME/.cargo/env"
 fi
 
 ############################################################################
@@ -151,11 +145,6 @@ fi
 #    export PATH="$(brew --prefix)/opt/python@3/libexec/bin:$PATH"
 #    echo ".bashrc found: PATH to python@3"
 #fi
-
-if [ -f "$HOME/.cargo/env" ]
-then
-    source "$HOME/.cargo/env"
-fi
 
 if [ -x "/opt/homebrew/bin/brew" ]
 then
@@ -205,9 +194,10 @@ then
     export PATH="$HOME/.rubies/ruby-3.3.4/bin:$PATH"
 fi
 
-if [[ -d "/usr/local/share/android-commandlinetools/cmdline-tools" ]]
+MAYBE_ANDROID_SDK_ROOT="/opt/homebrew/share/android-commandlinetools"
+if [[ -d "$MAYBE_ANDROID_SDK_ROOT/cmdline-tools" ]]
 then
-    export ANDROID_SDK_ROOT="/usr/local/share/android-commandlinetools"
+    export ANDROID_SDK_ROOT="$MAYBE_ANDROID_SDK_ROOT"
     echo ".bashrc found: ANDROID_SDK_ROOT=\"$ANDROID_SDK_ROOT\""
     if [[ -d "$ANDROID_SDK_ROOT/emulator" ]]
     then

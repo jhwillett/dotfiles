@@ -148,7 +148,7 @@
 
 ;; Big fonts please!
 ;;
-;; 200 is 20pt font
+;; :height 200 is 20pt font
 ;;
 (set-face-attribute 'default nil :height 260)
 
@@ -231,7 +231,7 @@
 ;; I like an editor which is on the top-right of the screen, under
 ;; which I can see some lines from my interactive shell.
 ;;
-(setq default-frame-alist '((left . -1) (width . 81) (height . 22)))
+(setq default-frame-alist '((left . -1) (top . 0) (width . 81) (height . 24)))
 (setq-default fill-column 80)
 
 ;(add-to-list 'load-path "~/.elisp")

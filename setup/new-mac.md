@@ -64,7 +64,7 @@ Install iTerm 3.5.12:
 * Make text bigger ;)
 * In iTerm / Settings;
   * General / Selection select “Copy to clip on selection”
-  * Profiles / Text / Font select Andale Mono 22
+  * Profiles / Text / Font select Monaco 22
   * Terminal set scrollback lines to 10000.
 
 Install Emacs For Mac:
@@ -105,7 +105,7 @@ Install Homebrew:
 ```
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
-* Preferred packages: `brew install emacs`
+* For the discerning connoisseur: `brew install emacs`
 
 Configure Git:
 * Check for presence of `~/.gitconfig`.
@@ -136,3 +136,39 @@ git clone https://github.com/RoundingErrorGames/deciduous.git
 The first repository is public and did not require any special access.  The
 second repository is private and will only work if `git-credential-manager` can
 successfully push you through an auth flow with GitHub.
+
+Install Rust ecosystem, per [rust-lang.org](https://www.rust-lang.org/learn/get-started) with the dreaded `curl | sh`:
+```
+$ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs > install-rustup.sh
+$ md5 install-rustup.sh
+MD5 (install-rustup.sh) = 635982ad66d588d7c934a07102b5bfb0
+$ shasum install-rustup.sh
+803765852c66df9de42a0ecbde43077372948c23  install-rustup.sh
+$ sh ./install-rustup.sh && rm ./install-rustup.sh
+# proceed with standard install
+# quit and relaunch iTerm
+$ cargo --version
+cargo 1.86.0 (adf9b6ad1 2025-02-28)
+$ rustc --version
+rustc 1.86.0 (05f9846f8 2025-03-31)
+```
+
+```
+$ make -f ~/setup/new-mac.mk toolchain
+$ cd deciduous/
+$ cargo r
+```
+
+```
+avdmanager list avd
+
+emulator -avd Pixel_6_Pro_API_34_PlayStore_ARM -gpu on -skin 1440x312
+
+avdmanager create avd -n "Pixel_7" -d "pixel_7" -k "system-images;android-35;google_apis;arm64-v8a"
+
+avdmanager create avd --force -n "jhw-vanilla" -d "pixel_7" -k "system-images;android-35;google_apis;x86_64"
+
+avdmanager list avd
+
+emulator @jhw-vanilla
+```
