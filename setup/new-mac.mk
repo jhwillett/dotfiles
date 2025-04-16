@@ -49,10 +49,13 @@ $(BUILDDIR)/rust.ok:
 	rustup update
 	rustup update stable
 	rustup default stable
+	rustc --version
 	rustup target add armv7-linux-androideabi aarch64-linux-android
 	rustup target add i686-linux-android x86_64-linux-android
 	rustup target add aarch64-apple-darwin x86_64-apple-darwin 
 	rustup target add x86_64-pc-windows-gnu
+	brew install mingw-w64
+	cargo --version
 	cargo install cargo-ndk cargo-machete cargo-outdated
 	mkdir -p $(dir $@)
 	touch $@
@@ -71,10 +74,11 @@ $(BUILDDIR)/rust.ok:
 android: $(BUILDDIR)/android.ok
 $(BUILDDIR)/toolchain.ok: $(BUILDDIR)/android.ok
 $(BUILDDIR)/android.ok:
-	brew install android-platform-tools android-commandlinetools openjdk
+	brew install android-platform-tools android-commandlinetools bundletool openjdk
 	adb --version
 	echo "TODO: sudo ln -sfn /opt/homebrew/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk"
 	echo "TODO: sdkmanager --install platform-tools"
+	sdkmanager --version
 	sdkmanager --update
 	sdkmanager --install "ndk;27.0.12077973" --channel=0
 	sdkmanager "build-tools;21.0.0" "build-tools;23.0.0" "build-tools;27.0.0" "build-tools;29.0.0" "build-tools;30.0.0" "build-tools;31.0.0" "build-tools;35.0.0"

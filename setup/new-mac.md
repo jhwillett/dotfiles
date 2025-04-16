@@ -29,6 +29,7 @@ What, me presbyopia?
 Minor stuff.
 * In Apple / System Settings / Appearance:
   * Set Accent color to green.
+* In Apple / System Settings / Control Center / Sound set Always in Menu Bar
 
 Install Chrome:
 * Launch Safari.
@@ -36,6 +37,16 @@ Install Chrome:
 * Note invitation to install Chrome.
 * Install Chrome, then launch.
 * Note call to action to set Chrome as default browser.
+* Disable AI Overviews in search results [per this page](https://www.theverge.com/24162621/google-search-ai-overviews-get-rid-of):
+  * Open chrome://settings/searchEngines in Chrome.
+  * Site Search / Add
+    * Name:                          `Google (no AI Overview)`
+    * Shortcut:                      `@web`
+    * URL with %s in place of query: `{google:baseURL}search?q=%s&udm=14`
+    * Click Add
+  * Sandwich menu, Make Default
+
+https://www.theverge.com/24162621/google-search-ai-overviews-get-rid-of
 
 Uninstall as much pre-installed cruft as permitted:
 * Under Finder / Applications.
@@ -65,6 +76,7 @@ Install iTerm 3.5.12:
 * In iTerm / Settings;
   * General / Selection select “Copy to clip on selection”
   * Profiles / Text / Font select Monaco 22
+  * Profiles / Colors / ANSI Colors / Yellow / Bright darken to e4e275
   * Terminal set scrollback lines to 10000.
 
 Install Emacs For Mac:
@@ -80,7 +92,7 @@ Installed Xcode and Homebrew:
 Set preferred shell from Mac default of `zsh` to `bash`:
 * Run `chsh -s /bin/bash`.
 
-Install [JHW's dotfiles|https://github.com/jhwillett/dotfiles]:
+Install [JHW's dotfiles](https://github.com/jhwillett/dotfiles):
 ```
 cd
 git init
@@ -157,18 +169,9 @@ rustc 1.86.0 (05f9846f8 2025-03-31)
 $ make -f ~/setup/new-mac.mk toolchain
 $ cd deciduous/
 $ cargo r
-```
-
-```
-avdmanager list avd
-
-emulator -avd Pixel_6_Pro_API_34_PlayStore_ARM -gpu on -skin 1440x312
-
-avdmanager create avd -n "Pixel_7" -d "pixel_7" -k "system-images;android-35;google_apis;arm64-v8a"
-
-avdmanager create avd --force -n "jhw-vanilla" -d "pixel_7" -k "system-images;android-35;google_apis;x86_64"
-
-avdmanager list avd
-
-emulator @jhw-vanilla
+$ cargo test
+$ avdmanager list avd
+$ emulator @jhw-vanilla
+$ make app-bundle
+$ make distro
 ```

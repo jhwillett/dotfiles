@@ -19,6 +19,11 @@
 !bin/**
 !.cargo/config.toml
 
+# Keep setup/, but not setup/build:
+#
+!setup
+!setup/**
+
 #
 # But seriously, ignore editor cruft:
 #
