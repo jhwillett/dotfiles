@@ -23,6 +23,7 @@
 #
 !setup
 !setup/**
+setup/build
 
 #
 # But seriously, ignore editor cruft:

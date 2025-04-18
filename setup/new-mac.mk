@@ -63,37 +63,57 @@ $(BUILDDIR)/rust.ok:
 # sdkmanager is installed with android-commandlinetools, but it will not run
 # without a Java Runtime.
 #
-# On my older Mac, I held firm at openjdk@21.  There were reports from the
-# React Native community that Java 22 compiles to class file version 66, yet
-# gradle cannot work past Java 21.
+# LOCAL_ARCH can be x86_64, which I used on an old Intel MacBook and would
+# imagine using on Windows, and arm64-v8a which I use now on newer Mac silicon.
 #
-# This is shocking and casts gradle in a bad light, but I am no longer trying to
-# use gradle so I am just going with latest Java:
+# NDK_VERSION comes from https://developer.android.com/ndk/downloads.  I chose
+# the latest for my most-recent install.
 #
+# ANDROID_VERSIONS is just whatever I find I need.  The make rules are built
+# incrementally.  You can add a new value to ANDROID_VERSIONS and re-run:
+#
+#   make -f ~/setup/new-mac.mk android
+#
+# ...and expect a minimal incremental install.
+#
+LOCAL_ARCH       := arm64-v8a
+NDK_VERSION      := 27.2.12479018
+#ANDROID_VERSIONS := 21 23 27 29 30 31 34 35
+ANDROID_VERSIONS := 21 35
+CURRENT_VERSION  := 21
+
 .PHONY: android
 android: $(BUILDDIR)/android.ok
-$(BUILDDIR)/toolchain.ok: $(BUILDDIR)/android.ok
-$(BUILDDIR)/android.ok:
-	brew install android-platform-tools android-commandlinetools bundletool openjdk
+	echo
+	sdkmanager --list_installed
+	echo
+	avdmanager list avd
+	echo
 	adb --version
+	sdkmanager --version
+$(BUILDDIR)/toolchain.ok: $(BUILDDIR)/android.ok
+
+$(BUILDDIR)/android-core.ok:
+	brew install android-platform-tools android-commandlinetools bundletool openjdk
 	echo "TODO: sudo ln -sfn /opt/homebrew/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk"
 	echo "TODO: sdkmanager --install platform-tools"
-	sdkmanager --version
 	sdkmanager --update
-	sdkmanager --install "ndk;27.0.12077973" --channel=0
-	sdkmanager "build-tools;21.0.0" "build-tools;23.0.0" "build-tools;27.0.0" "build-tools;29.0.0" "build-tools;30.0.0" "build-tools;31.0.0" "build-tools;35.0.0"
-	sdkmanager "platforms;android-21" "platforms;android-23" "platforms;android-27" "platforms;android-29" "platforms;android-30" "platforms;android-31" "platforms;android-34" "platforms;android-35"
-	sdkmanager "system-images;android-21;google_apis;x86" "system-images;android-21;google_apis;x86_64" "system-images;android-23;google_apis;x86" "system-images;android-23;google_apis;x86_64" "system-images;android-27;google_apis;x86" "system-images;android-29;google_apis;x86" "system-images;android-29;google_apis;x86_64" "system-images;android-30;google_apis;x86" "system-images;android-30;google_apis;x86_64" "system-images;android-31;google_apis;x86_64" "system-images;android-34;google_apis_playstore;arm64-v8a" "system-images;android-35;google_apis;arm64-v8a" "system-images;android-35;google_apis;x86_64"
-	sdkmanager "platforms;android-32" "platforms;android-33"
+	sdkmanager --install "ndk;$(NDK_VERSION)" --channel=0
 	sdkmanager "platform-tools" "emulator"
-	sdkmanager "platforms;android-21" "build-tools;21.0.0" "system-images;android-21;google_apis;x86"
-	sdkmanager "platforms;android-23" "build-tools;23.0.0" "system-images;android-23;google_apis;x86"
-	sdkmanager "platforms;android-29" "build-tools;29.0.0" "system-images;android-29;google_apis;x86"
-	sdkmanager "platforms;android-30" "build-tools;30.0.0" "system-images;android-30;google_apis;x86"
-	sdkmanager "platforms;android-31" "build-tools;31.0.0"
-	sdkmanager "system-images;android-21;google_apis;x86_64" "system-images;android-23;google_apis;x86_64" "system-images;android-29;google_apis;x86_64" "system-images;android-30;google_apis;x86_64" "system-images;android-31;google_apis;x86_64"
-	sdkmanager --list_installed
-	avdmanager create avd --force -n "jhw-vanilla" -d "pixel_7" -k "system-images;android-35;google_apis;x86_64"
-	avdmanager list avd
 	mkdir -p $(dir $@)
 	touch $@
+$(BUILDDIR)/android.ok: $(BUILDDIR)/android-core.ok
+
+$(ANDROID_VERSIONS:%=$(BUILDDIR)/android-%.ok): $(BUILDDIR)/android-%.ok: $(BUILDDIR)/android-core.ok
+	sdkmanager "platforms;android-$*" "build-tools;$*.0.0" "system-images;android-$*;google_apis;$(LOCAL_ARCH)"
+	mkdir -p $(dir $@)
+	touch $@
+$(BUILDDIR)/android.ok: $(ANDROID_VERSIONS:%=$(BUILDDIR)/android-%.ok)
+
+.PHONY: jhw-vanilla
+jhw-vanilla: $(BUILDDIR)/jhw-vanilla.ok
+$(BUILDDIR)/jhw-vanilla.ok: $(BUILDDIR)/android-$(CURRENT_VERSION).ok
+	avdmanager create avd --force -n "jhw-vanilla" -d "pixel_7" -k "system-images;android-$(CURRENT_VERSION);google_apis;$(LOCAL_ARCH)"
+	mkdir -p $(dir $@)
+	touch $@
+$(BUILDDIR)/android.ok: $(BUILDDIR)/jhw-vanilla.ok
