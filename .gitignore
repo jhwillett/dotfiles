@@ -17,6 +17,11 @@
 !.elisp/**
 !bin
 !bin/**
+
+# Yes to .cargo/config.toml, no to everything else under .cargo/.
+#  
+!.cargo
+.cargo/*
 !.cargo/config.toml
 
 # Keep setup/, but not setup/build:

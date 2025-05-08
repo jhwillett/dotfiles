@@ -60,6 +60,18 @@ $(BUILDDIR)/rust.ok:
 	mkdir -p $(dir $@)
 	touch $@
 
+.PHONY: diesel
+diesel: $(BUILDDIR)/diesel.ok
+$(BUILDDIR)/toolchain.ok: $(BUILDDIR)/diesel.ok
+$(BUILDDIR)/diesel.ok: $(BUILDDIR)/rust.ok
+$(BUILDDIR)/diesel.ok:
+	brew install sqlite
+	cargo install diesel_cli --no-default-features --features sqlite
+#	brew install mysql sqlite postgresql
+#	cargo install diesel_cli
+	mkdir -p $(dir $@)
+	touch $@
+
 # sdkmanager is installed with android-commandlinetools, but it will not run
 # without a Java Runtime.
 #
@@ -67,7 +79,9 @@ $(BUILDDIR)/rust.ok:
 # imagine using on Windows, and arm64-v8a which I use now on newer Mac silicon.
 #
 # NDK_VERSION comes from https://developer.android.com/ndk/downloads.  I chose
-# the latest for my most-recent install.
+# the latest for my most-recent install.  Note that there is some hard-coding in
+# ~/.bashrc where we set the ANDROID_NDK_HOME, which is sensitive to this
+# valuye.
 #
 # ANDROID_VERSIONS is just whatever I find I need.  The make rules are built
 # incrementally.  You can add a new value to ANDROID_VERSIONS and re-run:
@@ -80,7 +94,7 @@ LOCAL_ARCH       := arm64-v8a
 NDK_VERSION      := 27.2.12479018
 #ANDROID_VERSIONS := 21 23 27 29 30 31 34 35
 ANDROID_VERSIONS := 21 35
-CURRENT_VERSION  := 21
+CURRENT_VERSION  := 35
 
 .PHONY: android
 android: $(BUILDDIR)/android.ok
@@ -112,8 +126,9 @@ $(BUILDDIR)/android.ok: $(ANDROID_VERSIONS:%=$(BUILDDIR)/android-%.ok)
 
 .PHONY: jhw-vanilla
 jhw-vanilla: $(BUILDDIR)/jhw-vanilla.ok
+	avdmanager list avd
 $(BUILDDIR)/jhw-vanilla.ok: $(BUILDDIR)/android-$(CURRENT_VERSION).ok
-	avdmanager create avd --force -n "jhw-vanilla" -d "pixel_7" -k "system-images;android-$(CURRENT_VERSION);google_apis;$(LOCAL_ARCH)"
+	avdmanager create avd --force --name "jhw-vanilla" -d "pixel_7" -k "system-images;android-$(CURRENT_VERSION);google_apis;$(LOCAL_ARCH)"
 	mkdir -p $(dir $@)
 	touch $@
 $(BUILDDIR)/android.ok: $(BUILDDIR)/jhw-vanilla.ok

@@ -30,6 +30,7 @@ Minor stuff.
 * In Apple / System Settings / Appearance:
   * Set Accent color to green.
 * In Apple / System Settings / Control Center / Sound set Always in Menu Bar
+* In Apple / System Settings / Modifier Keys set Caps Lock to No Action
 
 Install Chrome:
 * Launch Safari.

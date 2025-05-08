@@ -210,16 +210,18 @@ then
         echo ".bashrc found: PATH to Android adb tools"
     fi
 fi
-if [[ -n "$ANDROID_SDK_ROOT" ]] && [[ -d "$ANDROID_SDK_ROOT/ndk/27.0.12077973" ]]
+ANDROID_NDK_VERSION=27.2.12479018
+if [[ -n "$ANDROID_SDK_ROOT" ]] && [[ -d "$ANDROID_SDK_ROOT/ndk/$ANDROID_NDK_VERSION" ]]
 then
-    export ANDROID_NDK_HOME="$ANDROID_SDK_ROOT/ndk/27.0.12077973"
+    export ANDROID_NDK_HOME="$ANDROID_SDK_ROOT/ndk/$ANDROID_NDK_VERSION"
     export NDK_HOME="$ANDROID_NDK_HOME"
     echo ".bashrc found: ANDROID_NDK_HOME=\"$ANDROID_NDK_HOME\""
 fi
-if [[ -n "$ANDROID_SDK_ROOT" ]] && [[ -d "$ANDROID_SDK_ROOT/build-tools/35.0.0" ]]
+ANDROID_BUILD_TOOLS_VERSION=35.0.0
+if [[ -n "$ANDROID_SDK_ROOT" ]] && [[ -d "$ANDROID_SDK_ROOT/build-tools/$ANDROID_BUILD_TOOLS_VERSION" ]]
 then
-    export PATH="$ANDROID_SDK_ROOT/build-tools/35.0.0:$PATH"
-    echo ".bashrc found: PATH to Android SDK build tools"
+    export PATH="$ANDROID_SDK_ROOT/build-tools/$ANDROID_BUILD_TOOLS_VERSION:$PATH"
+    echo ".bashrc found: PATH to Android SDK build tools: $ANDROID_SDK_ROOT/build-tools/$ANDROID_BUILD_TOOLS_VERSION"
 fi
 
 if [[ -d "/usr/local/opt/llvm/bin" ]]
