@@ -53,7 +53,8 @@ $(BUILDDIR)/rust.ok:
 	rustup target add armv7-linux-androideabi aarch64-linux-android
 	rustup target add i686-linux-android x86_64-linux-android
 	rustup target add aarch64-apple-darwin x86_64-apple-darwin 
-	rustup target add x86_64-pc-windows-gnu
+	rustup target add x86_64-pc-windows-gnu  i686-pc-windows-gnu
+	rustup target add x86_64-pc-windows-msvc i686-pc-windows-msvc
 	brew install mingw-w64
 	cargo --version
 	cargo install cargo-ndk cargo-machete cargo-outdated
@@ -71,6 +72,19 @@ $(BUILDDIR)/diesel.ok:
 #	cargo install diesel_cli
 	mkdir -p $(dir $@)
 	touch $@
+
+# Per https://apple.stackexchange.com/questions/105846, the command:
+#
+#   defaults write com.apple.CrashReporter UseUNC 1
+#
+# changes it so crash reports are are notif instead of a popup.  This is nice to
+# have when developing software which crashes a lot.
+#
+.PHONY: mac
+mac: $(BUILDDIR)mac.ok
+$(BUILDDIR)/toolchain.ok: $(BUILDDIR)/mac.ok
+$(BUILDDIR)/mac.ok:
+	defaults write com.apple.CrashReporter UseUNC 1
 
 # sdkmanager is installed with android-commandlinetools, but it will not run
 # without a Java Runtime.

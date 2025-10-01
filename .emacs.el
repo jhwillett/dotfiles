@@ -370,3 +370,12 @@
 (add-to-list 'auto-mode-alist '("README\\.md\\'" . gfm-mode))
 (with-eval-after-load 'markdown-mode
   (define-key markdown-mode-map (kbd "C-c C-e") #'markdown-do))
+
+
+;; I like to control whether or not I put a newline at the end of a file.
+;;
+;;  https://www.gnu.org/software/emacs/manual/html_node/emacs/Customize-Save.html
+;;
+(setq
+ mode-require-final-newline nil
+ )
